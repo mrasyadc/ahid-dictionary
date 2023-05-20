@@ -87,16 +87,26 @@ export default function Home() {
             </Thead>
             <Tbody>
               <Tr>
-                <Td>inches</Td>
-                <Td>millimetres (mm)</Td>
+                <Td>Disease</Td>
+                <Td>Botulism</Td>
               </Tr>
               <Tr>
-                <Td>feet</Td>
-                <Td>centimetres (cm)</Td>
+                <Td>Classification</Td>
+                <Td>ICD-9 005.1; ICD-10 A05.1</Td>
               </Tr>
               <Tr>
-                <Td>yards</Td>
-                <Td>metres (m)</Td>
+                <Td>Syndromes and synonyms</Td>
+                <Td>
+                  Botulinum toxin, produced by the anerobic sporeforming
+                  bacterium Clostridium botulinum types A, B, E and rarely F.
+                </Td>
+              </Tr>
+              <Tr>
+                <Td>Reservoir</Td>
+                <Td overflowX={"hidden"}>
+                  C. botulinum spores are found in soil, dust, honey, marine
+                  sediments, and in intestines of fish and land animals.
+                </Td>
               </Tr>
             </Tbody>
             <Tfoot>
