@@ -1,5 +1,6 @@
 // app/layout.tsx
 import { Providers } from "./providers";
+import { theme } from "../theme";
 
 export default function RootLayout({
   children,
