@@ -27,14 +27,20 @@ import {
 } from "@chakra-ui/react";
 import { Search2Icon, SunIcon } from "@chakra-ui/icons";
 import { useKeyPress } from "../hooks/useKeyPress";
-import { useFocus } from "../hooks/useFocus";
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
 
 export default function Home() {
   const { toggleColorMode } = useColorMode();
   const altPressed = useKeyPress("Alt");
   const kPressed = useKeyPress("k");
-  const [inputRef, setFocus] = useFocus();
+
+  const inputRef = useRef<HTMLInputElement>(null);
+
+  const setFocus = (): void => {
+    if (inputRef.current) {
+      inputRef.current.focus();
+    }
+  };
 
   useEffect(() => {
     if (altPressed && kPressed) {
