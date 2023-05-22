@@ -10,27 +10,19 @@ import {
   Stack,
   Input,
   Container,
-  Table,
-  TableContainer,
-  TableCaption,
-  Thead,
-  Tr,
-  Th,
-  Tbody,
-  Td,
-  Tfoot,
-  Flex,
   InputGroup,
   InputRightElement,
   InputLeftElement,
   Kbd,
+  Link,
 } from "@chakra-ui/react";
-import { Search2Icon, SunIcon } from "@chakra-ui/icons";
-import { useKeyPress } from "../hooks/useKeyPress";
+import { ExternalLinkIcon, Search2Icon, SunIcon } from "@chakra-ui/icons";
+import { useKeyPress } from "../src/hooks/useKeyPress";
 import { useEffect, useRef } from "react";
+import DarkModeButton from "@/src/components/DarkModeButton";
+import DataTable from "@/src/components/DataTable";
 
-export default function Home() {
-  const { toggleColorMode } = useColorMode();
+export default function Home(): JSX.Element {
   const altPressed = useKeyPress("Alt");
   const kPressed = useKeyPress("k");
 
@@ -50,11 +42,7 @@ export default function Home() {
 
   return (
     <>
-      <Stack direction={"row-reverse"} padding={6}>
-        <Button onClick={toggleColorMode}>
-          <SunIcon />
-        </Button>
-      </Stack>
+      <DarkModeButton />
       <Heading fontSize={"48px"} fontWeight={700} as="h1" textAlign={"center"}>
         Atlas of Human Infectious Disease
       </Heading>
@@ -62,13 +50,26 @@ export default function Home() {
         Dictionary
       </Heading>
       <Text textAlign={"center"}>
-        App and Design by Muhammad Rasyad Caesarardhi
+        App and Design by{" "}
+        <Link href="https://www.showwcase.com/mrasyadc" isExternal>
+          Muhammad Rasyad Caesarardhi <ExternalLinkIcon mx="2px" />
+        </Link>
       </Text>
       <Text textAlign={"center"}>
-        Data processed and summarized using algorithm from BRIO paper
+        Data processed and summarized using{" "}
+        <Link href="https://aclanthology.org/2022.acl-long.207/" isExternal>
+          Bringing Order to Abstractive Summarization paper{" "}
+          <ExternalLinkIcon mx="2px" />
+        </Link>
       </Text>
       <Text textAlign={"center"}>
-        Data provided by Atlas of Human Infectious Diseases
+        Data provided by{" "}
+        <Link
+          href="https://onlinelibrary.wiley.com/doi/book/10.1002/9781444354690"
+          isExternal
+        >
+          Atlas of Human Infectious Diseases <ExternalLinkIcon mx="2px" />
+        </Link>
       </Text>
       <Container marginTop={10}>
         <InputGroup>
@@ -80,49 +81,7 @@ export default function Home() {
             <Kbd>Alt</Kbd>+<Kbd>K</Kbd>
           </InputRightElement>
         </InputGroup>
-        <TableContainer marginTop={10}>
-          <Table variant="simple">
-            <TableCaption>
-              Atlas of Human Infectious Diseases Quick Summary
-            </TableCaption>
-            <Thead>
-              <Tr>
-                <Th>Subjects</Th>
-                <Th>Quick Description</Th>
-              </Tr>
-            </Thead>
-            <Tbody>
-              <Tr>
-                <Td>Disease</Td>
-                <Td>Botulism</Td>
-              </Tr>
-              <Tr>
-                <Td>Classification</Td>
-                <Td>ICD-9 005.1; ICD-10 A05.1</Td>
-              </Tr>
-              <Tr>
-                <Td>Syndromes and synonyms</Td>
-                <Td>
-                  Botulinum toxin, produced by the anerobic sporeforming
-                  bacterium Clostridium botulinum types A, B, E and rarely F.
-                </Td>
-              </Tr>
-              <Tr>
-                <Td>Reservoir</Td>
-                <Td overflowX={"hidden"}>
-                  C. botulinum spores are found in soil, dust, honey, marine
-                  sediments, and in intestines of fish and land animals.
-                </Td>
-              </Tr>
-            </Tbody>
-            <Tfoot>
-              <Tr>
-                <Th>Subjects</Th>
-                <Th>Quick Description</Th>
-              </Tr>
-            </Tfoot>
-          </Table>
-        </TableContainer>
+        <DataTable />
       </Container>
     </>
   );
