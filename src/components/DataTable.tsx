@@ -14,7 +14,7 @@ import TextPopover from "./TextPopover";
 
 export default function DataTable(): JSX.Element {
   return (
-    <Table variant="simple">
+    <Table variant="simple" marginTop={6}>
       <TableCaption>
         Atlas of Human Infectious Diseases Quick Summary
       </TableCaption>
