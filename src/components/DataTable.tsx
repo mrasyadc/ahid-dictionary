@@ -12,7 +12,7 @@ import {
 
 import TextPopover from "./TextPopover";
 
-export default function DataTable({ disease }): JSX.Element {
+export default function DataTable({ disease }: any): JSX.Element {
   const attributes = Object.keys(disease["original_text"]);
   return (
     <Table variant="simple" marginTop={6}>
