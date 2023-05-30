@@ -40,9 +40,7 @@ export default function Disease({
 }) {
   // export default function Disease() {
   let { disease_name } = params;
-  disease_name = decodeURI(disease_name);
-  disease_name = disease_name.replaceAll("%2C", ",");
-  disease_name = disease_name.replaceAll("%26", "&");
+  disease_name = decodeURIComponent(disease_name);
 
   console.log(disease_name);
   // return;

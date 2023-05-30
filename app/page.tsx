@@ -129,7 +129,10 @@ export default function Home(): JSX.Element {
           {diseases &&
             Object.keys(diseases).map((disease, key) => {
               return (
-                <Link key={disease} href={`/disease/${encodeURI(disease)}`}>
+                <Link
+                  key={disease}
+                  href={`/disease/${encodeURIComponent(disease)}`}
+                >
                   <DiseaseList key={disease}>{disease}</DiseaseList>
                 </Link>
               );
