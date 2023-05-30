@@ -2,6 +2,7 @@
 
 import Image from "next/image";
 import styles from "./page.module.css";
+import useSWR from "swr";
 import {
   Heading,
   Text,
@@ -15,12 +16,24 @@ import {
   InputLeftElement,
   Kbd,
   Link,
+  Center,
+  Divider,
+  List,
+  Grid,
+  Box,
+  HStack,
+  Flex,
+  Spacer,
+  SimpleGrid,
 } from "@chakra-ui/react";
 import { ExternalLinkIcon, Search2Icon, SunIcon } from "@chakra-ui/icons";
 import { useKeyPress } from "../src/hooks/useKeyPress";
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import DarkModeButton from "@/src/components/DarkModeButton";
 import DataTable from "@/src/components/DataTable";
+import DiseaseList from "@/src/components/DiseaseList";
+
+const fetcher = (url: string) => fetch(url).then((res) => res.json());
 
 export default function Home(): JSX.Element {
   const altPressed = useKeyPress("Alt");
@@ -39,6 +52,15 @@ export default function Home(): JSX.Element {
       setFocus();
     }
   }, [kPressed, altPressed]);
+
+  const [diseases, setDiseases] = useState();
+  const [diseasesKey, setDiseasesKey] = useState();
+
+  const { data, error, isLoading } = useSWR("/api/diseases", fetcher);
+
+  useEffect(() => {
+    setDiseases(data);
+  }, [data]);
 
   return (
     <>
@@ -81,7 +103,24 @@ export default function Home(): JSX.Element {
             <Kbd>Alt</Kbd>+<Kbd>K</Kbd>
           </InputRightElement>
         </InputGroup>
-        <DataTable />
+      </Container>
+
+      <Container maxWidth={"100ch"} centerContent={true} marginBottom={20}>
+        <SimpleGrid columns={[1, null, 2]} spacing={4} marginTop={10}>
+          {/* {diseases.map((disease) => { */}
+          {/* return <DiseaseList key={disease}>{disease}</DiseaseList>; */}
+          {/* })} */}
+          {/* {diseases["Anthrax"]} */}
+          {isLoading && "Loading"}
+          {diseases &&
+            Object.keys(diseases).map((disease, key) => {
+              return (
+                <Link key={disease} href={"/disease/" + key}>
+                  <DiseaseList key={disease}>{disease}</DiseaseList>
+                </Link>
+              );
+            })}
+        </SimpleGrid>
       </Container>
     </>
   );
