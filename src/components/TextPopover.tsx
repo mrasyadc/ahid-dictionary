@@ -11,10 +11,14 @@ import {
 } from "@chakra-ui/react";
 
 interface TextPopoverProps {
+  attr: string;
   text: string;
 }
 
-export default function TextPopover({ text }: TextPopoverProps): JSX.Element {
+export default function TextPopover({
+  text,
+  attr,
+}: TextPopoverProps): JSX.Element {
   return (
     <Popover placement="top-start" trigger="hover" preventOverflow={true}>
       <PopoverTrigger>
@@ -23,7 +27,7 @@ export default function TextPopover({ text }: TextPopoverProps): JSX.Element {
       <PopoverContent>
         <PopoverArrow />
         <PopoverCloseButton />
-        <PopoverHeader>Full text</PopoverHeader>
+        <PopoverHeader>{attr} full text</PopoverHeader>
         <PopoverBody>{text}</PopoverBody>
       </PopoverContent>
     </Popover>

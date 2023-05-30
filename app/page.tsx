@@ -25,6 +25,7 @@ import {
   Flex,
   Spacer,
   SimpleGrid,
+  Spinner,
 } from "@chakra-ui/react";
 import { ExternalLinkIcon, Search2Icon, SunIcon } from "@chakra-ui/icons";
 import { useKeyPress } from "../src/hooks/useKeyPress";
@@ -111,11 +112,11 @@ export default function Home(): JSX.Element {
           {/* return <DiseaseList key={disease}>{disease}</DiseaseList>; */}
           {/* })} */}
           {/* {diseases["Anthrax"]} */}
-          {isLoading && "Loading"}
+          {isLoading && <Spinner />}
           {diseases &&
             Object.keys(diseases).map((disease, key) => {
               return (
-                <Link key={disease} href={"/disease/" + key}>
+                <Link key={disease} href={`/disease/${disease}`}>
                   <DiseaseList key={disease}>{disease}</DiseaseList>
                 </Link>
               );

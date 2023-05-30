@@ -12,7 +12,8 @@ import {
 
 import TextPopover from "./TextPopover";
 
-export default function DataTable(): JSX.Element {
+export default function DataTable({ disease }): JSX.Element {
+  const attributes = Object.keys(disease["original_text"]);
   return (
     <Table variant="simple" marginTop={6}>
       <TableCaption>
@@ -25,47 +26,24 @@ export default function DataTable(): JSX.Element {
         </Tr>
       </Thead>
       <Tbody>
-        <Tr>
-          <Td>
-            Disease
-            <TextPopover text={"Botulism"} />
-          </Td>
-          <Td>Botulism</Td>
-        </Tr>
-        <Tr>
-          <Td>
-            Classification <TextPopover text={"ICD-9 005.1; ICD-10 A05.1"} />
-          </Td>
-          <Td>ICD-9 005.1; ICD-10 A05.1</Td>
-        </Tr>
-        <Tr>
-          <Td>
-            Syndromes and synonyms{" "}
-            <TextPopover
-              text={
-                "Botulinum toxin, produced by the anerobic sporeforming bacterium Clostridium botulinum types A, B, E and rarely F."
-              }
-            />
-          </Td>
-          <Td>
-            Botulinum toxin, produced by the anerobic sporeforming bacterium
-            Clostridium botulinum types A, B, E and rarely F.
-          </Td>
-        </Tr>
-        <Tr>
-          <Td>
-            Reservoir
-            <TextPopover
-              text={
-                "C. botulinum spores are found in soil, dust, honey, marine sediments, and in intestines of fish and land animals."
-              }
-            />
-          </Td>
-          <Td overflowX={"hidden"}>
-            C. botulinum spores are found in soil, dust, honey, marine
-            sediments, and in intestines of fish and land animals.
-          </Td>
-        </Tr>
+        {attributes.map((attr) => {
+          return (
+            <Tr key={attr}>
+              <Td width={"21ch"}>
+                {attr}
+                <TextPopover
+                  attr={attr}
+                  text={disease?.["original_text"][attr]}
+                />
+              </Td>
+              <Td>
+                {disease?.["summarize_text"][attr] == "NaN"
+                  ? "-"
+                  : disease?.["summarize_text"][attr]}
+              </Td>
+            </Tr>
+          );
+        })}
       </Tbody>
       <Tfoot>
         <Tr>

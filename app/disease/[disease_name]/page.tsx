@@ -6,6 +6,7 @@ import DataTable from "@/src/components/DataTable";
 import DiseaseList from "@/src/components/DiseaseList";
 import { ExternalLinkIcon } from "@chakra-ui/icons";
 import {
+  Spinner,
   Button,
   Container,
   Heading,
@@ -14,12 +15,39 @@ import {
   Stack,
   Text,
 } from "@chakra-ui/react";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import useSWR from "swr";
 
-export default function Disease({ params }: { params: { id: number } }) {
+// export async function generateStaticParams() {
+//   const diseases = await fetch("/api/diseases").then((res) => res.json());
+
+//   console.log(diseases);
+//   // return diseases.map((disease) => ({
+//   //   slug: disease,
+//   // }));
+
+//   return [{ id: "1" }, { id: "2" }, { id: "3" }];
+// }
+
+// async function getDiseases() {
+//   return data;
+// }
+
+export default function Disease({
+  params,
+}: {
+  params: { disease_name: string };
+}) {
+  // export default function Disease() {
+  const { disease_name } = params;
+
+  const fetcher = (url: string) => fetch(url).then((res) => res.json());
+  const { data, error, isLoading } = useSWR("/api/diseases", fetcher);
+
   return (
     <>
       <DarkModeButton />
+      {/* <Heading>{id}</Heading> */}
 
       <Heading fontSize={"48px"} fontWeight={700} as="h1" textAlign={"center"}>
         Atlas of Human Infectious Disease
@@ -51,7 +79,8 @@ export default function Disease({ params }: { params: { id: number } }) {
       </Text>
       <Container marginTop={10}>
         <BackButton />
-        <DataTable />
+        {isLoading && <Spinner />}
+        {!isLoading && <DataTable disease={data[disease_name]} />}
       </Container>
     </>
   );
