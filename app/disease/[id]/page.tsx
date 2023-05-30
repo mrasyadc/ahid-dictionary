@@ -16,7 +16,7 @@ import {
 } from "@chakra-ui/react";
 import { useState } from "react";
 
-export default function Disease({ params }) {
+export default function Disease({ params }: { params: { id: number } }) {
   return (
     <>
       <DarkModeButton />

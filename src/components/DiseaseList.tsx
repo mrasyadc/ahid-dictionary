@@ -8,7 +8,11 @@ import {
 
 import { ArrowForwardIcon, ChevronRightIcon, LinkIcon } from "@chakra-ui/icons";
 
-export default function DiseaseList({ children }): JSX.Element {
+export default function DiseaseList({
+  children,
+}: {
+  children: React.ReactNode;
+}): JSX.Element {
   return (
     <List>
       <ListItem>
