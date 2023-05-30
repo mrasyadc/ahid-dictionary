@@ -39,7 +39,13 @@ export default function Disease({
   params: { disease_name: string };
 }) {
   // export default function Disease() {
-  const { disease_name } = params;
+  let { disease_name } = params;
+  disease_name = decodeURI(disease_name);
+  disease_name = disease_name.replaceAll("%2C", ",");
+  disease_name = disease_name.replaceAll("%26", "&");
+
+  console.log(disease_name);
+  // return;
 
   const fetcher = (url: string) => fetch(url).then((res) => res.json());
   const { data, error, isLoading } = useSWR("/api/diseases", fetcher);
@@ -47,7 +53,6 @@ export default function Disease({
   return (
     <>
       <DarkModeButton />
-      {/* <Heading>{id}</Heading> */}
 
       <Heading fontSize={"48px"} fontWeight={700} as="h1" textAlign={"center"}>
         Atlas of Human Infectious Disease
@@ -55,6 +60,19 @@ export default function Disease({
       <Heading fontSize={"48px"} fontWeight={700} as="h1" textAlign={"center"}>
         Dictionary
       </Heading>
+      <Text textAlign={"center"}>
+        Thesis Supervisor 1{" "}
+        <Link href="#" isExternal>
+          Retno Aulia Vinarti, S.Kom., M.Kom., Ph.D.{" "}
+          <ExternalLinkIcon mx="2px" />
+        </Link>
+      </Text>
+      <Text textAlign={"center"}>
+        Thesis Supervisor 2{" "}
+        <Link href="#" isExternal>
+          Renny Pradina, S.T., M.T. <ExternalLinkIcon mx="2px" />
+        </Link>
+      </Text>
       <Text textAlign={"center"}>
         App and Design by{" "}
         <Link href="https://www.showwcase.com/mrasyadc" isExternal>

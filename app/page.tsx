@@ -73,6 +73,19 @@ export default function Home(): JSX.Element {
         Dictionary
       </Heading>
       <Text textAlign={"center"}>
+        Thesis Supervisor 1{" "}
+        <Link href="#" isExternal>
+          Retno Aulia Vinarti, S.Kom., M.Kom., Ph.D.{" "}
+          <ExternalLinkIcon mx="2px" />
+        </Link>
+      </Text>
+      <Text textAlign={"center"}>
+        Thesis Supervisor 2{" "}
+        <Link href="#" isExternal>
+          Renny Pradina, S.T., M.T. <ExternalLinkIcon mx="2px" />
+        </Link>
+      </Text>
+      <Text textAlign={"center"}>
         App and Design by{" "}
         <Link href="https://www.showwcase.com/mrasyadc" isExternal>
           Muhammad Rasyad Caesarardhi <ExternalLinkIcon mx="2px" />
@@ -86,7 +99,7 @@ export default function Home(): JSX.Element {
         </Link>
       </Text>
       <Text textAlign={"center"}>
-        Data provided by{" "}
+        Original data provided by{" "}
         <Link
           href="https://onlinelibrary.wiley.com/doi/book/10.1002/9781444354690"
           isExternal
@@ -116,7 +129,7 @@ export default function Home(): JSX.Element {
           {diseases &&
             Object.keys(diseases).map((disease, key) => {
               return (
-                <Link key={disease} href={`/disease/${disease}`}>
+                <Link key={disease} href={`/disease/${encodeURI(disease)}`}>
                   <DiseaseList key={disease}>{disease}</DiseaseList>
                 </Link>
               );
