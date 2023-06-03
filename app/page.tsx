@@ -56,14 +56,26 @@ export default function Home(): JSX.Element {
     }
   }, [kPressed, altPressed]);
 
-  const [diseases, setDiseases] = useState();
+  const [diseases, setDiseases] = useState([""]);
   const [diseasesKey, setDiseasesKey] = useState();
+  const [searchTerm, setSearchTerm] = useState("");
 
   const { data, error, isLoading } = useSWR("/api/diseases/en", fetcher);
 
   useEffect(() => {
-    setDiseases(data);
+    if (!isLoading) {
+      setDiseases(Object.keys(data));
+    }
   }, [data]);
+
+  useEffect(() => {
+    if (!isLoading) {
+      const results = Object.keys(data).filter((disease) => {
+        return disease.toLowerCase().includes(searchTerm.toLowerCase());
+      });
+      setDiseases(results);
+    }
+  }, [searchTerm]);
 
   return (
     <>
@@ -76,7 +88,11 @@ export default function Home(): JSX.Element {
           <InputLeftElement>
             <Search2Icon />
           </InputLeftElement>
-          <Input placeholder="Search diseases or keywords" ref={inputRef} />
+          <Input
+            placeholder="Search diseases or keywords"
+            ref={inputRef}
+            onChange={(e) => setSearchTerm(e.target.value)}
+          />
           <InputRightElement marginRight={5}>
             <Kbd>Alt</Kbd>+<Kbd>K</Kbd>
           </InputRightElement>
@@ -85,13 +101,9 @@ export default function Home(): JSX.Element {
 
       <Container maxWidth={"100ch"} centerContent={true} marginBottom={20}>
         <SimpleGrid columns={[1, null, 2]} spacing={4} marginTop={10}>
-          {/* {diseases.map((disease) => { */}
-          {/* return <DiseaseList key={disease}>{disease}</DiseaseList>; */}
-          {/* })} */}
-          {/* {diseases["Anthrax"]} */}
           {isLoading && <Spinner />}
           {diseases &&
-            Object.keys(diseases).map((disease, key) => {
+            diseases.map((disease) => {
               return (
                 <Link
                   key={disease}
