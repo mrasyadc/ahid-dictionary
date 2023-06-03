@@ -102,7 +102,8 @@ export default function Home(): JSX.Element {
       <Container maxWidth={"100ch"} centerContent={true} marginBottom={20}>
         <SimpleGrid columns={[1, null, 2]} spacing={4} marginTop={10}>
           {isLoading && <Spinner />}
-          {diseases &&
+          {!isLoading &&
+            diseases[0] !== "" &&
             diseases.map((disease) => {
               return (
                 <Link
