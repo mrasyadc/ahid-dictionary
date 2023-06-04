@@ -1,10 +1,4 @@
-import {
-  List,
-  ListItem,
-  ListIcon,
-  OrderedList,
-  UnorderedList,
-} from "@chakra-ui/react";
+import { List, ListItem, ListIcon } from "@chakra-ui/react";
 
 import { ArrowForwardIcon, ChevronRightIcon, LinkIcon } from "@chakra-ui/icons";
 

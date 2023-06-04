@@ -1,6 +1,5 @@
 import { InfoOutlineIcon } from "@chakra-ui/icons";
 import {
-  Button,
   Popover,
   PopoverArrow,
   PopoverBody,
