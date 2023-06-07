@@ -12,14 +12,20 @@ export default function Header() {
       </Heading>
       <Text textAlign={"center"}>
         Thesis Supervisor 1{" "}
-        <Link href="#" isExternal>
+        <Link
+          href="https://scholar.google.co.id/citations?user=f2_71Q8AAAAJ&hl=en"
+          isExternal
+        >
           Retno Aulia Vinarti, S.Kom., M.Kom., Ph.D.{" "}
           <ExternalLinkIcon mx="2px" />
         </Link>
       </Text>
       <Text textAlign={"center"}>
         Thesis Supervisor 2{" "}
-        <Link href="#" isExternal>
+        <Link
+          href="https://scholar.google.com/citations?user=TlI3mc0AAAAJ&hl=en"
+          isExternal
+        >
           Renny Pradina, S.T., M.T. <ExternalLinkIcon mx="2px" />
         </Link>
       </Text>
