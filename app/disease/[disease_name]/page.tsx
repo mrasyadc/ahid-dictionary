@@ -19,6 +19,22 @@ import {
 } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
 import useSWR from "swr";
+import { Metadata, ResolvingMetadata } from "next";
+
+type Props = {
+  params: { disease_name: string };
+};
+
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+  // read route params
+  const disease_name = params.disease_name;
+
+  console.log(disease_name);
+
+  return {
+    title: `${disease_name} - Atlas of Human Infectious Disease`,
+  };
+}
 
 export default function Disease({
   params,
