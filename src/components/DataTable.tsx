@@ -37,7 +37,7 @@ export default function DataTable({ disease, isEnglish }: any): JSX.Element {
                   text={disease?.["original_text"][attr]}
                 />
               </Td>
-              <Td>
+              <Td _firstLetter={{ textTransform: "capitalize" }}>
                 {disease?.["summarize_text"][attr] == "NaN"
                   ? "-"
                   : disease?.["summarize_text"][attr]}
