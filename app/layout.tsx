@@ -3,8 +3,7 @@ import { Providers } from "./providers";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Atlas of Human Infectious Disease Dictionary",
-  "google-site-verification": "7dw65JxAOx5PFJ6qeMi2J1QWGMRoXpq52YE3XOXFJfU"
+  title: "Atlas of Human Infectious Disease Dictionary"
 };
 export default function RootLayout({
   children,
