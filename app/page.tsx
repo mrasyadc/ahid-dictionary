@@ -67,7 +67,7 @@ export default function Home(): JSX.Element {
     if (!isLoading) {
       setDiseases(Object.keys(data));
     }
-  }, [data]);
+  }, [data, isLoading]);
 
   useEffect(() => {
     if (!isLoading) {
@@ -76,7 +76,7 @@ export default function Home(): JSX.Element {
       });
       setDiseases(results);
     }
-  }, [searchTerm]);
+  }, [searchTerm, isLoading, data]);
 
   return (
     <>

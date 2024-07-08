@@ -11,6 +11,8 @@ interface Link {
 
 interface Node {
   id: string;
+  x: number;
+  y: number;
 }
 
 interface NetworkGraphProps {
@@ -29,10 +31,10 @@ const NetworkGraph: React.FC<NetworkGraphProps> = ({ data }) => {
     if (!data) return;
 
     d3.select(svgRef.current).selectAll('*').remove();
-    const svg = d3.select(svgRef.current)
-    .call(d3.zoom().on('zoom', (event) => {
-        svg.attr('transform', event.transform);
-      }));
+    const svg = d3.select(svgRef.current as Element)
+        .call(d3.zoom().on('zoom', (event) => {
+            svg.attr('transform', event.transform);
+          }));
     const width = 600;
     const height = 400;
     const center = {
@@ -40,8 +42,8 @@ const NetworkGraph: React.FC<NetworkGraphProps> = ({ data }) => {
         y: height / 2
       };
 
-    const nodes = Array.from(new Set(data.flatMap(d => [d.disease1, d.disease2])))
-      .map(d => ({ id: d }));
+    const nodes: Node[] = Array.from(new Set(data.flatMap(d => [d.disease1, d.disease2])))
+      .map(d => ({ id: d, x: 0, y: 0 }));
 
     const links: Link[] = data.map(d => ({
       source: d.disease1,
@@ -53,10 +55,11 @@ const NetworkGraph: React.FC<NetworkGraphProps> = ({ data }) => {
       .domain(nodes.map(d => d.id))
       .range([0, 2 * Math.PI]);
 
-    nodes.forEach((node, index) => {
-      const angle = scale(node.id);
-      node.x = center.x + Math.cos(angle) * width / 3;
-      node.y = center.y + Math.sin(angle) * height / 3;
+    nodes.forEach((node, _) => {
+      const angle: number | undefined = scale(node.id);
+      const defaultAngle: number = 0; // Add a default value for the angle
+      node.x = center.x + Math.cos(angle ?? defaultAngle) * width / 3; // Use the default value if angle is undefined
+      node.y = center.y + Math.sin(angle ?? defaultAngle) * height / 3; // Use the default value if angle is undefined
     });
 
     const simulation = d3.forceSimulation(nodes as any)
@@ -118,11 +121,10 @@ const NetworkGraph: React.FC<NetworkGraphProps> = ({ data }) => {
       .attr('fill', '#69b3a2')
       .on('mouseover', mouseover)
       .on('mouseout', mouseout)
-      .call(d3.drag()
-        .on('start', dragstarted)
-        .on('drag', dragged)
-        .on('end', dragended)
-        );
+      .call(d3.drag<SVGCircleElement, Node>()
+    .on('start', dragstarted)
+    .on('drag', dragged)
+    .on('end', dragended) as any); // Use `as any` to bypas
 
     node.append('title')
       .text(d => d.id);
@@ -157,18 +159,18 @@ const NetworkGraph: React.FC<NetworkGraphProps> = ({ data }) => {
       d3.select(this).style('cursor', 'default');
     }
 
-    function dragstarted(event: d3.DragEvent<SVGCircleElement>, d: any) {
+    function dragstarted(event: any, d: any) {
         if (!event.active) simulation.alphaTarget(0.3).restart();
         d.fx = d.x;
         d.fy = d.y;
     }
   
-    function dragged(event: d3.DragEvent<SVGCircleElement>, d: any) {
+    function dragged(event: any, d: any) {
         d.fx = event.x;
         d.fy = event.y;
     }
   
-    function dragended(event: d3.DragEvent<SVGCircleElement>, d: any) {
+    function dragended(event: any, d: any) {
         if (!event.active) simulation.alphaTarget(0);
         d.fx = null;
         d.fy = null;
