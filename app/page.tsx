@@ -35,6 +35,7 @@ import DataTable from "@/src/components/DataTable";
 import DiseaseList from "@/src/components/DiseaseList";
 import LanguageButton from "@/src/components/LanguageButton";
 import Header from "@/src/components/Header";
+import NextLink from 'next/link';
 
 const fetcher = (url: string) => fetch(url).then((res) => res.json());
 
@@ -81,6 +82,11 @@ export default function Home(): JSX.Element {
     <>
       <Stack direction={"row-reverse"} padding={6}>
         <DarkModeButton />
+        <NextLink href="/similaritygraph" passHref>
+          <Button as={Link} padding={4}>
+            Disease Similarity Graph
+          </Button>
+      </NextLink>
       </Stack>
       <Header />
       <Container marginTop={10}>
