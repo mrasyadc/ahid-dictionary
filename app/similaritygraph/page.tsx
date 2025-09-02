@@ -7,17 +7,11 @@ import {
   Heading,
   Text,
   Button,
-  useColorMode,
   Stack,
   Input,
   Container,
-  InputGroup,
-  InputRightElement,
-  InputLeftElement,
-  Kbd,
   Link,
   Center,
-  Divider,
   List,
   Grid,
   Box,
@@ -27,13 +21,13 @@ import {
   SimpleGrid,
   Spinner,
 } from "@chakra-ui/react";
-import { Search2Icon } from "@chakra-ui/icons";
-import DarkModeButton from "@/src/components/DarkModeButton";
-import SimilarityPageHeader from "@/src/components/HeaderSimilarityPage";
-import NetworkGraph from "@/src/components/SimilarityGraph";
-import SimilarityTable from "@/src/components/SimilarityTable";
+import { Search } from "lucide-react";
+import DarkModeButton from "@/components/DarkModeButton";
+import SimilarityPageHeader from "@/components/HeaderSimilarityPage";
+import NetworkGraph from "@/components/SimilarityGraph";
+import SimilarityTable from "@/components/SimilarityTable";
 import data from "@/json/similardata.json";
-import { useKeyPress } from "@/src/hooks/useKeyPress";
+import { useKeyPress } from "@/hooks/useKeyPress";
 import NextLink from 'next/link';
 
 const SimilarDisease: React.FC = () => {
@@ -79,21 +73,22 @@ const SimilarDisease: React.FC = () => {
       </Stack>
       <SimilarityPageHeader />
       <Container marginTop={10}>
-        <InputGroup>
-          <InputLeftElement>
-            <Search2Icon />
-          </InputLeftElement>
+        <Box position="relative">
+          <Box position="absolute" left="3" top="50%" transform="translateY(-50%)" zIndex="2">
+            <Search size={16} />
+          </Box>
           <Input
             placeholder="Search diseases or keywords"
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
             mb={4}
+            paddingLeft="10"
             ref={inputRef} // Attach ref to the input field
           />
-          <InputRightElement marginRight={5}>
-            <Kbd>Alt</Kbd>+<Kbd>K</Kbd>
-          </InputRightElement>
-        </InputGroup>
+          <Box position="absolute" right="3" top="50%" transform="translateY(-50%)" zIndex="2">
+            <Text fontSize="sm" color="gray.500">Alt+K</Text>
+          </Box>
+        </Box>
       </Container>
 
       <Container centerContent>

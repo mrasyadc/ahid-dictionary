@@ -1,5 +1,4 @@
-import { MoonIcon, SunIcon } from "@chakra-ui/icons";
-import { Button, Stack, useColorMode } from "@chakra-ui/react";
+import { Button } from "@chakra-ui/react";
 import { MouseEventHandler } from "react";
 
 export default function LanguageButton({
@@ -8,6 +7,6 @@ export default function LanguageButton({
 }: {
   isEnglish: boolean;
   onClick: MouseEventHandler;
-}): JSX.Element {
+}) {
   return <Button onClick={onClick}>{isEnglish ? "EN" : "ID"}</Button>;
 }

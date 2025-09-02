@@ -1,5 +1,5 @@
 import React from 'react';
-import { Table, Tbody, Td, Th, Thead, Tr, Box } from '@chakra-ui/react';
+import { Box } from '@chakra-ui/react';
 
 interface DiseaseTableProps {
   data: { disease1: string; disease2: string; similarity: number }[];
@@ -7,38 +7,87 @@ interface DiseaseTableProps {
 }
 
 const DiseaseTable: React.FC<DiseaseTableProps> = ({ data, searchTerm }) => {
-  const highlightStyle = {
-    fontWeight: 'bold',
-  };
-
   const matchSearchTerm = (text: string): boolean => {
     return text.toLowerCase().includes(searchTerm.toLowerCase());
   };
 
   return (
     <Box>
-      <Table>
-        <Thead>
-          <Tr>
-            <Th>Disease 1</Th>
-            <Th>Disease 2</Th>
-            <Th>Similarity</Th>
-          </Tr>
-        </Thead>
-        <Tbody>
+      <Box 
+        as="table" 
+        width="100%" 
+        borderCollapse="collapse"
+        borderWidth="1px"
+        borderColor="gray.200"
+        borderRadius="md"
+      >
+        <Box as="thead" backgroundColor="gray.50">
+          <Box as="tr">
+            <Box 
+              as="th" 
+              padding={4} 
+              textAlign="left" 
+              borderBottomWidth="1px"
+              borderColor="gray.200"
+              fontWeight="semibold"
+            >
+              Disease 1
+            </Box>
+            <Box 
+              as="th" 
+              padding={4} 
+              textAlign="left" 
+              borderBottomWidth="1px"
+              borderColor="gray.200"
+              fontWeight="semibold"
+            >
+              Disease 2
+            </Box>
+            <Box 
+              as="th" 
+              padding={4} 
+              textAlign="left" 
+              borderBottomWidth="1px"
+              borderColor="gray.200"
+              fontWeight="semibold"
+            >
+              Similarity
+            </Box>
+          </Box>
+        </Box>
+        <Box as="tbody">
           {data.map((item, index) => (
-            <Tr key={index}>
-              <Td style={matchSearchTerm(item.disease1) ? highlightStyle : {}}>
+            <Box as="tr" key={index} _hover={{ backgroundColor: "gray.50" }}>
+              <Box 
+                as="td" 
+                padding={4} 
+                borderBottomWidth="1px"
+                borderColor="gray.200"
+                fontWeight={matchSearchTerm(item.disease1) ? "bold" : "normal"}
+              >
                 {item.disease1}
-              </Td>
-              <Td style={matchSearchTerm(item.disease2) ? highlightStyle : {}}>
+              </Box>
+              <Box 
+                as="td" 
+                padding={4} 
+                borderBottomWidth="1px"
+                borderColor="gray.200"
+                fontWeight={matchSearchTerm(item.disease2) ? "bold" : "normal"}
+              >
                 {item.disease2}
-              </Td>
-              <Td>{item.similarity}</Td>
-            </Tr>
+              </Box>
+              <Box 
+                as="td" 
+                padding={4} 
+                borderBottomWidth="1px"
+                borderColor="gray.200"
+              >
+                {item.similarity}
+              </Box>
+            </Box>
           ))}
-        </Tbody>
-      </Table>
+        </Box>
+      </Box>
     </Box>
   );
 };

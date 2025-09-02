@@ -7,19 +7,10 @@ import {
   Heading,
   Text,
   Button,
-  useColorMode,
   Stack,
   Input,
   Container,
-  InputGroup,
-  InputRightElement,
-  InputLeftElement,
-  Kbd,
   Link,
-  Center,
-  Divider,
-  List,
-  Grid,
   Box,
   HStack,
   Flex,
@@ -27,7 +18,7 @@ import {
   SimpleGrid,
   Spinner,
 } from "@chakra-ui/react";
-import { ExternalLinkIcon, Search2Icon, SunIcon } from "@chakra-ui/icons";
+import { Search, ExternalLink, Sun, Keyboard } from "lucide-react";
 import { useKeyPress } from "@/hooks/useKeyPress";
 import { useEffect, useRef, useState } from "react";
 import DarkModeButton from "@/components/DarkModeButton";
@@ -39,7 +30,7 @@ import NextLink from 'next/link';
 
 const fetcher = (url: string) => fetch(url).then((res) => res.json());
 
-export default function Home(): JSX.Element {
+export default function Home() {
   const altPressed = useKeyPress("Alt");
   const kPressed = useKeyPress("k");
 
@@ -90,23 +81,24 @@ export default function Home(): JSX.Element {
       </Stack>
       <Header />
       <Container marginTop={10}>
-        <InputGroup>
-          <InputLeftElement>
-            <Search2Icon />
-          </InputLeftElement>
+        <Box position="relative">
+          <Box position="absolute" left="3" top="50%" transform="translateY(-50%)" zIndex="2">
+            <Search size={16} />
+          </Box>
           <Input
             placeholder="Search diseases or keywords"
+            paddingLeft="10"
             ref={inputRef}
             onChange={(e) => setSearchTerm(e.target.value)}
           />
-          <InputRightElement marginRight={5}>
-            <Kbd>Alt</Kbd>+<Kbd>K</Kbd>
-          </InputRightElement>
-        </InputGroup>
+          <Box position="absolute" right="3" top="50%" transform="translateY(-50%)" zIndex="2">
+            <Text fontSize="sm" color="gray.500">Alt+K</Text>
+          </Box>
+        </Box>
       </Container>
 
       <Container maxWidth={"100ch"} centerContent={true} marginBottom={20}>
-        <SimpleGrid columns={[1, null, 2]} spacing={4} marginTop={10}>
+        <SimpleGrid columns={[1, null, 2]} gap={4} marginTop={10}>
           {isLoading && <Spinner />}
           {!isLoading &&
             diseases[0] !== "" &&

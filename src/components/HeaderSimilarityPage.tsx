@@ -1,5 +1,5 @@
-import { ExternalLinkIcon } from "@chakra-ui/icons";
-import { Heading, Link, Text } from "@chakra-ui/react";
+import { Heading, Link, Text, Box } from "@chakra-ui/react";
+import { ExternalLink } from "lucide-react";
 
 export default function SimilarityPageHeader() {
   return (
@@ -14,45 +14,76 @@ export default function SimilarityPageHeader() {
         Thesis Supervisor 1{" "}
         <Link
           href="https://scholar.google.co.id/citations?user=f2_71Q8AAAAJ&hl=en"
-          isExternal
+          target="_blank"
+          rel="noopener noreferrer"
         >
           Retno Aulia Vinarti, S.Kom., M.Kom., Ph.D.{" "}
-          <ExternalLinkIcon mx="2px" />
+          <Box as="span" display="inline-block" ml="2px">
+            <ExternalLink size={14} />
+          </Box>
         </Link>
       </Text>
       <Text textAlign={"center"}>
         Thesis Supervisor 2{" "}
         <Link
           href="https://scholar.google.com/citations?user=WuDASG4AAAAJ&hl=en"
-          isExternal
+          target="_blank"
+          rel="noopener noreferrer"
         >
-          Faizal Mahananto, S.Kom., M.Eng., Ph.D. <ExternalLinkIcon mx="2px" />
+          Faizal Mahananto, S.Kom., M.Eng., Ph.D. 
+          <Box as="span" display="inline-block" ml="2px">
+            <ExternalLink size={14} />
+          </Box>
         </Link>
       </Text>
       <Text textAlign={"center"}>
         App and Design by{" "}
-        <Link href="https://www.showwcase.com/mrasyadc" isExternal>
-          Muhammad Rasyad Caesarardhi <ExternalLinkIcon mx="2px" />
+        <Link 
+          href="https://www.showwcase.com/mrasyadc" 
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          Muhammad Rasyad Caesarardhi 
+          <Box as="span" display="inline-block" ml="2px">
+            <ExternalLink size={14} />
+          </Box>
         </Link>
         and{" "}
-        <Link href="https://www.github.com/dianizzah" isExternal>
-          Dian Nizzah Fortuna <ExternalLinkIcon mx="2px" />
+        <Link 
+          href="https://www.github.com/dianizzah" 
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          Dian Nizzah Fortuna 
+          <Box as="span" display="inline-block" ml="2px">
+            <ExternalLink size={14} />
+          </Box>
         </Link>
       </Text>
       <Text textAlign={"center"}>
         Disease similarity score computed using{" "}
-        <Link href="https://doi.org/10.1093/bioinformatics/btx238" isExternal>
+        <Link 
+          href="https://doi.org/10.1093/bioinformatics/btx238" 
+          target="_blank"
+          rel="noopener noreferrer"
+        >
         BIOSSES: a Semantic Sentence Similarity Estimation System for the Biomedical Domain{" "}
-          <ExternalLinkIcon mx="2px" />
+          <Box as="span" display="inline-block" ml="2px">
+            <ExternalLink size={14} />
+          </Box>
         </Link>
       </Text>
       <Text textAlign={"center"}>
         Original data provided by{" "}
         <Link
           href="https://onlinelibrary.wiley.com/doi/book/10.1002/9781444354690"
-          isExternal
+          target="_blank"
+          rel="noopener noreferrer"
         >
-          Atlas of Human Infectious Diseases <ExternalLinkIcon mx="2px" />
+          Atlas of Human Infectious Diseases 
+          <Box as="span" display="inline-block" ml="2px">
+            <ExternalLink size={14} />
+          </Box>
         </Link>
       </Text>
     </>

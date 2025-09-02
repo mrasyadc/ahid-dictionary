@@ -1,12 +1,12 @@
 "use client";
 import { useEffect, useState } from "react";
-import BackButton from "@/src/components/BackButton";
-import DarkModeButton from "@/src/components/DarkModeButton";
-import DataTable from "@/src/components/DataTable";
-import DiseaseList from "@/src/components/DiseaseList";
-import Header from "@/src/components/Header";
-import LanguageButton from "@/src/components/LanguageButton";
-import { ExternalLinkIcon } from "@chakra-ui/icons";
+import BackButton from "@/components/BackButton";
+import DarkModeButton from "@/components/DarkModeButton";
+import DataTable from "@/components/DataTable";
+import DiseaseList from "@/components/DiseaseList";
+import Header from "@/components/Header";
+import LanguageButton from "@/components/LanguageButton";
+import { ExternalLink } from "lucide-react";
 import {
   Spinner,
   Button,

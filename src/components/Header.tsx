@@ -1,5 +1,5 @@
-import { ExternalLinkIcon } from "@chakra-ui/icons";
-import { Heading, Link, Text } from "@chakra-ui/react";
+import { Heading, Link, Text, Box } from "@chakra-ui/react";
+import { ExternalLink } from "lucide-react";
 
 export default function Header() {
   return (
@@ -14,41 +14,65 @@ export default function Header() {
         Thesis Supervisor 1{" "}
         <Link
           href="https://scholar.google.co.id/citations?user=f2_71Q8AAAAJ&hl=en"
-          isExternal
+          target="_blank"
+          rel="noopener noreferrer"
         >
           Retno Aulia Vinarti, S.Kom., M.Kom., Ph.D.{" "}
-          <ExternalLinkIcon mx="2px" />
+          <Box as="span" display="inline-block" ml="2px">
+            <ExternalLink size={14} />
+          </Box>
         </Link>
       </Text>
       <Text textAlign={"center"}>
         Thesis Supervisor 2{" "}
         <Link
           href="https://scholar.google.com/citations?user=TlI3mc0AAAAJ&hl=en"
-          isExternal
+          target="_blank"
+          rel="noopener noreferrer"
         >
-          Renny Pradina, S.T., M.T. <ExternalLinkIcon mx="2px" />
+          Renny Pradina, S.T., M.T. 
+          <Box as="span" display="inline-block" ml="2px">
+            <ExternalLink size={14} />
+          </Box>
         </Link>
       </Text>
       <Text textAlign={"center"}>
         App and Design by{" "}
-        <Link href="https://www.showwcase.com/mrasyadc" isExternal>
-          Muhammad Rasyad Caesarardhi <ExternalLinkIcon mx="2px" />
+        <Link 
+          href="https://www.showwcase.com/mrasyadc" 
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          Muhammad Rasyad Caesarardhi 
+          <Box as="span" display="inline-block" ml="2px">
+            <ExternalLink size={14} />
+          </Box>
         </Link>
       </Text>
       <Text textAlign={"center"}>
         Data processed and summarized using{" "}
-        <Link href="https://aclanthology.org/2022.acl-long.207/" isExternal>
+        <Link 
+          href="https://aclanthology.org/2022.acl-long.207/" 
+          target="_blank"
+          rel="noopener noreferrer"
+        >
           Bringing Order to Abstractive Summarization paper{" "}
-          <ExternalLinkIcon mx="2px" />
+          <Box as="span" display="inline-block" ml="2px">
+            <ExternalLink size={14} />
+          </Box>
         </Link>
       </Text>
       <Text textAlign={"center"}>
         Original data provided by{" "}
         <Link
           href="https://onlinelibrary.wiley.com/doi/book/10.1002/9781444354690"
-          isExternal
+          target="_blank"
+          rel="noopener noreferrer"
         >
-          Atlas of Human Infectious Diseases <ExternalLinkIcon mx="2px" />
+          Atlas of Human Infectious Diseases 
+          <Box as="span" display="inline-block" ml="2px">
+            <ExternalLink size={14} />
+          </Box>
         </Link>
       </Text>
     </>

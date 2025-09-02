@@ -1,12 +1,20 @@
-import { MoonIcon, SunIcon } from "@chakra-ui/icons";
-import { Button, Stack, useColorMode } from "@chakra-ui/react";
+import { Moon, Sun } from "lucide-react";
+import { Button } from "@chakra-ui/react";
+import { useState } from "react";
 
-export default function DarkModeButton(): JSX.Element {
-  const { colorMode, toggleColorMode } = useColorMode();
+export default function DarkModeButton() {
+  const [isDark, setIsDark] = useState(false);
+
+  const toggleColorMode = () => {
+    setIsDark(!isDark);
+    // In Chakra UI v3, color mode is handled differently
+    // For now, we'll use a simple state toggle
+    document.documentElement.classList.toggle('dark');
+  };
 
   return (
     <Button onClick={toggleColorMode}>
-      {colorMode == "dark" ? <SunIcon /> : <MoonIcon />}
+      {isDark ? <Sun size={16} /> : <Moon size={16} />}
     </Button>
   );
 }

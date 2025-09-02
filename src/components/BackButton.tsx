@@ -1,15 +1,15 @@
-import { ArrowBackIcon, MoonIcon, SunIcon } from "@chakra-ui/icons";
-import { Button, Stack } from "@chakra-ui/react";
+import { Button, HStack } from "@chakra-ui/react";
+import { ArrowLeft } from "lucide-react";
 import { useRouter } from "next/navigation";
 
-export default function BackButton(): JSX.Element {
+export default function BackButton() {
   const router = useRouter();
 
   return (
-    <Stack direction={"row"} padding={6}>
+    <HStack padding={6}>
       <Button onClick={() => router.push("/")}>
-        <ArrowBackIcon />
+        <ArrowLeft size={16} />
       </Button>
-    </Stack>
+    </HStack>
   );
 }

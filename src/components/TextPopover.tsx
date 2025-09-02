@@ -1,13 +1,5 @@
-import { InfoOutlineIcon } from "@chakra-ui/icons";
-import {
-  Popover,
-  PopoverArrow,
-  PopoverBody,
-  PopoverCloseButton,
-  PopoverContent,
-  PopoverHeader,
-  PopoverTrigger,
-} from "@chakra-ui/react";
+import { Info } from "lucide-react";
+import { Box } from "@chakra-ui/react";
 
 interface TextPopoverProps {
   attr: string;
@@ -17,18 +9,15 @@ interface TextPopoverProps {
 export default function TextPopover({
   text,
   attr,
-}: TextPopoverProps): JSX.Element {
+}: TextPopoverProps) {
   return (
-    <Popover placement="top-start" trigger="hover" preventOverflow={true}>
-      <PopoverTrigger>
-        <InfoOutlineIcon color={"blue"} marginLeft={2} />
-      </PopoverTrigger>
-      <PopoverContent>
-        <PopoverArrow />
-        <PopoverCloseButton />
-        <PopoverHeader>{attr} full text</PopoverHeader>
-        <PopoverBody>{text}</PopoverBody>
-      </PopoverContent>
-    </Popover>
+    <Box 
+      display="inline-block" 
+      ml={2}
+      title={`${attr} full text: ${text}`}
+      style={{ cursor: 'pointer' }}
+    >
+      <Info color="blue" size={16} />
+    </Box>
   );
 }
