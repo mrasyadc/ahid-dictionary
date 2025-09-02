@@ -28,13 +28,13 @@ import {
   Spinner,
 } from "@chakra-ui/react";
 import { ExternalLinkIcon, Search2Icon, SunIcon } from "@chakra-ui/icons";
-import { useKeyPress } from "../src/hooks/useKeyPress";
+import { useKeyPress } from "@/hooks/useKeyPress";
 import { useEffect, useRef, useState } from "react";
-import DarkModeButton from "@/src/components/DarkModeButton";
-import DataTable from "@/src/components/DataTable";
-import DiseaseList from "@/src/components/DiseaseList";
-import LanguageButton from "@/src/components/LanguageButton";
-import Header from "@/src/components/Header";
+import DarkModeButton from "@/components/DarkModeButton";
+import DataTable from "@/components/DataTable";
+import DiseaseList from "@/components/DiseaseList";
+import LanguageButton from "@/components/LanguageButton";
+import Header from "@/components/Header";
 import NextLink from 'next/link';
 
 const fetcher = (url: string) => fetch(url).then((res) => res.json());
