@@ -1,0 +1,3 @@
+- upgrade dependencies of NextJS to LTS
+- upgrade dependencies of ChakraUI to LTS
+- always use context7 and chakraui mcp servers!
