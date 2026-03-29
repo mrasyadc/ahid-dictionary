@@ -1,7 +1,7 @@
 "use client";;
 import Image from "next/image";
 import { useColorMode } from "../src/components/ui/color-mode";
-import styles from "./page.module.css";
+
 import useSWR from "swr";
 import {
   Steps,
