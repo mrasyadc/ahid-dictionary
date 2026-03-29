@@ -1,5 +1,5 @@
 "use client";
-import { useEffect, useState } from "react";
+import { useEffect, useState, use } from "react";
 import BackButton from "@/src/components/BackButton";
 import DarkModeButton from "@/src/components/DarkModeButton";
 import DataTable from "@/src/components/DataTable";
@@ -39,9 +39,9 @@ import useSWR from "swr";
 export default function Disease({
   params,
 }: {
-  params: { disease_name: string };
+  params: Promise<{ disease_name: string }>;
 }) {
-  let { disease_name } = params;
+  let { disease_name } = use(params);
   disease_name = decodeURIComponent(disease_name);
 
   const fetcher = (url: string) => fetch(url).then((res) => res.json());

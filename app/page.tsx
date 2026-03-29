@@ -82,11 +82,9 @@ export default function Home(): JSX.Element {
     <>
       <Stack direction={"row-reverse"} padding={6}>
         <DarkModeButton />
-        <NextLink href="/similaritygraph" passHref>
-          <Button as={Link} padding={4}>
-            Disease Similarity Graph
-          </Button>
-      </NextLink>
+        <Button as={NextLink} href="/similaritygraph" padding={4}>
+          Disease Similarity Graph
+        </Button>
       </Stack>
       <Header />
       <Container marginTop={10}>

@@ -71,11 +71,9 @@ const SimilarDisease: React.FC = () => {
     <>
       <Stack direction={"row-reverse"} padding={6}>
         <DarkModeButton />
-        <NextLink href="/" passHref>
-          <Button as={Link} padding={4}>
-            Homepage
-          </Button>
-      </NextLink>
+        <Button as={NextLink} href="/" padding={4}>
+          Homepage
+        </Button>
       </Stack>
       <SimilarityPageHeader />
       <Container marginTop={10}>
