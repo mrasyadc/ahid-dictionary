@@ -79,7 +79,7 @@ export default function Home() {
         <InputGroup
           startElement={<LuSearch />}
           endElement={<><Kbd>Alt</Kbd>+<Kbd>K</Kbd></>}
-          maxWidth="600px"
+          maxWidth="37.5rem"
           width="100%"
         >
           <Input
@@ -90,7 +90,7 @@ export default function Home() {
         </InputGroup>
       </Flex>
       <Flex justify="center" w="full" mb={20} mt={10} px={4}>
-        <Box maxWidth="700px" width="100%">
+        <Box maxWidth="43.75rem" width="100%">
           <SimpleGrid columns={[1, null, 2]} gap={4}>
           {isLoading && <Spinner />}
           {!isLoading &&

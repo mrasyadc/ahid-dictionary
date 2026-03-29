@@ -14,7 +14,7 @@ export default function DiseaseList({
       _hover={{
         color: "fg",
         "& > svg": {
-          transform: "translateX(6px)",
+          transform: "translateX(0.375rem)",
           color: "currentColor"
         }
       }}
@@ -24,7 +24,7 @@ export default function DiseaseList({
       <LuArrowRight
         style={{
           transition: "transform 0.2s ease-in-out, color 0.2s ease-in-out",
-          marginRight: "12px"
+          marginRight: "0.75rem"
         }}
       />
       <Text display="inline-block" transition="transform 0.2s">{children}</Text>

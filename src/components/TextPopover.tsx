@@ -21,7 +21,7 @@ export default function TextPopover({
         </Box>
       </HoverCard.Trigger>
       <HoverCard.Positioner zIndex="popover">
-        <HoverCard.Content maxWidth="350px" padding={4} boxShadow="xl" borderRadius="lg" bg="white" _dark={{ bg: "gray.800" }}>
+        <HoverCard.Content maxWidth="22rem" padding={4} boxShadow="xl" borderRadius="lg" bg="white" _dark={{ bg: "gray.800" }}>
           <HoverCard.Arrow />
           <Box>
             <Heading size="sm" marginBottom={2}>{attr}</Heading>

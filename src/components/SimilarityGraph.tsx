@@ -97,7 +97,7 @@ const NetworkGraph: React.FC<NetworkGraphProps> = ({ data }) => {
       .enter().append('text')
       .attr('dy', '0.35em')
       .style('fill', colorMode === 'dark' ? '#fff' : '#000')
-      .style('font-size', '12px')
+      .style('font-size', '0.75rem')
       .text(d => d.value.toFixed(2));
 
     const label = graphcontainer.append('g')

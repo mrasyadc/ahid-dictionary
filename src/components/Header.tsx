@@ -4,7 +4,7 @@ import { LuExternalLink } from 'react-icons/lu';
 export default function Header() {
   return (
     <>
-      <Heading fontSize={"48px"} fontWeight={700} as="h1" textAlign={"center"} lineHeight="1.2" mb={4}>
+      <Heading fontSize="3rem" fontWeight={700} as="h1" textAlign={"center"} lineHeight="1.2" mb={4}>
         Atlas of Human Infectious Disease<br/>Dictionary
       </Heading>
       <Text textAlign={"center"}>
@@ -14,7 +14,7 @@ export default function Header() {
           target='_blank'
           rel='noopener noreferrer'>
           Retno Aulia Vinarti, S.Kom., M.Kom., Ph.D.{" "}
-          <Icon mx="2px" asChild><LuExternalLink /></Icon>
+          <Icon mx="0.5" asChild><LuExternalLink /></Icon>
         </Link>
       </Text>
       <Text textAlign={"center"}>
@@ -23,7 +23,7 @@ export default function Header() {
           href="https://scholar.google.com/citations?user=TlI3mc0AAAAJ&hl=en"
           target='_blank'
           rel='noopener noreferrer'>
-          Renny Pradina, S.T., M.T. <Icon mx="2px" asChild><LuExternalLink /></Icon>
+          Renny Pradina, S.T., M.T. <Icon mx="0.5" asChild><LuExternalLink /></Icon>
         </Link>
       </Text>
       <Text textAlign={"center"}>
@@ -32,7 +32,7 @@ export default function Header() {
           href="https://www.showwcase.com/mrasyadc"
           target='_blank'
           rel='noopener noreferrer'>
-          Muhammad Rasyad Caesarardhi <Icon mx="2px" asChild><LuExternalLink /></Icon>
+          Muhammad Rasyad Caesarardhi <Icon mx="0.5" asChild><LuExternalLink /></Icon>
         </Link>
       </Text>
       <Text textAlign={"center"}>
@@ -42,7 +42,7 @@ export default function Header() {
           target='_blank'
           rel='noopener noreferrer'>
           Bringing Order to Abstractive Summarization paper{" "}
-          <Icon mx="2px" asChild><LuExternalLink /></Icon>
+          <Icon mx="0.5" asChild><LuExternalLink /></Icon>
         </Link>
       </Text>
       <Text textAlign={"center"}>
@@ -51,7 +51,7 @@ export default function Header() {
           href="https://onlinelibrary.wiley.com/doi/book/10.1002/9781444354690"
           target='_blank'
           rel='noopener noreferrer'>
-          Atlas of Human Infectious Diseases <Icon mx="2px" asChild><LuExternalLink /></Icon>
+          Atlas of Human Infectious Diseases <Icon mx="0.5" asChild><LuExternalLink /></Icon>
         </Link>
       </Text>
     </>

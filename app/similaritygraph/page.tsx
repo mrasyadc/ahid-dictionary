@@ -78,7 +78,7 @@ const SimilarDisease: React.FC = () => {
         <InputGroup
           startElement={<LuSearch />}
           endElement={<><Kbd>Alt</Kbd>+<Kbd>K</Kbd></>}
-          maxWidth="600px"
+          maxWidth="37.5rem"
           width="100%"
         >
           <Input
