@@ -16,6 +16,7 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <body suppressHydrationWarning>
+        <style>{`a:focus, a:focus-visible, button:focus, button:focus-visible { outline: none !important; box-shadow: none !important; }`}</style>
         <Provider>{children}</Provider>
         <Script
           defer

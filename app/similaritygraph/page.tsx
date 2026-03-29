@@ -99,6 +99,7 @@ const SimilarDisease: React.FC = () => {
               cursor="pointer"
               transition="all 0.15s"
               _hover={{ borderColor: SIMILARITY_COLOR, color: SIMILARITY_COLOR }}
+              _focusVisible={{ outline: "none" }}
             >
               {ex}
             </Box>

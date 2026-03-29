@@ -60,6 +60,7 @@ const DiseaseTable: React.FC<DiseaseTableProps> = ({ data, query }) => {
                   fontWeight={isDimmed(item.disease1) ? 'normal' : hasSearch ? 'medium' : 'normal'}
                   transition="all 0.2s"
                   _hover={{ color: SIMILARITY_COLOR, textDecoration: 'underline', textDecorationColor: SIMILARITY_COLOR }}
+                  _focusVisible={{ outline: 'none' }}
                 >
                   {item.disease1}
                 </Link>
@@ -72,6 +73,7 @@ const DiseaseTable: React.FC<DiseaseTableProps> = ({ data, query }) => {
                   fontWeight={isDimmed(item.disease2) ? 'normal' : hasSearch ? 'medium' : 'normal'}
                   transition="all 0.2s"
                   _hover={{ color: SIMILARITY_COLOR, textDecoration: 'underline', textDecorationColor: SIMILARITY_COLOR }}
+                  _focusVisible={{ outline: 'none' }}
                 >
                   {item.disease2}
                 </Link>

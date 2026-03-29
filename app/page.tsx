@@ -114,6 +114,7 @@ export default function Home() {
               cursor="pointer"
               transition="all 0.15s"
               _hover={{ borderColor: SIMILARITY_COLOR, color: SIMILARITY_COLOR }}
+              _focusVisible={{ outline: 'none' }}
             >
               {ex}
             </Box>
@@ -132,6 +133,7 @@ export default function Home() {
                   key={disease}
                   href={`/disease/${encodeURIComponent(disease)}`}
                   _focus={{ outline: "none" }}
+                  _focusVisible={{ outline: "none" }}
                   _hover={{ color: SIMILARITY_COLOR, textDecoration: 'none' }}
                 >
                   <DiseaseList key={disease}>{disease}</DiseaseList>
