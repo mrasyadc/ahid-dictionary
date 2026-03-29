@@ -4,6 +4,7 @@ import type { Metadata } from "next";
 import Script from "next/script";
 import "@fontsource/inter/700.css";
 import "@fontsource/inter/400.css";
+import "./globals.css";
 
 export const metadata: Metadata = {
   title: "Atlas of Human Infectious Disease Dictionary"
@@ -16,7 +17,6 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <body suppressHydrationWarning>
-        <style>{`a:focus, a:focus-visible, button:focus, button:focus-visible { outline: none !important; box-shadow: none !important; }`}</style>
         <Provider>{children}</Provider>
         <Script
           defer
