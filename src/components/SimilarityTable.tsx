@@ -1,5 +1,5 @@
 import React from 'react';
-import { Steps, Table, Box, Badge, HStack, Text } from '@chakra-ui/react';
+import { Steps, Table, Box, Badge, HStack, Text, Link } from '@chakra-ui/react';
 import { SIMILARITY_COLOR } from '@/src/constants';
 
 interface DiseaseTableProps {
@@ -8,12 +8,11 @@ interface DiseaseTableProps {
 }
 
 const DiseaseTable: React.FC<DiseaseTableProps> = ({ data, searchTerm }) => {
-  const highlightStyle = {
-    fontWeight: 'bold',
-  };
-
-  const matchSearchTerm = (text: string): boolean => {
-    return text.toLowerCase().includes(searchTerm.toLowerCase());
+  const isDimmed = (text: string): boolean => {
+    // If there's no search term, nothing is dimmed (everything is 'fg')
+    if (!searchTerm || searchTerm.trim() === '') return false;
+    // Dim the text only if it does NOT match the search term
+    return !text.toLowerCase().includes(searchTerm.toLowerCase());
   };
 
   // Mathematically interpolate the color using pure RGB blending
@@ -42,11 +41,29 @@ const DiseaseTable: React.FC<DiseaseTableProps> = ({ data, searchTerm }) => {
         <Table.Body>
           {data.map((item, index) => (
             <Table.Row key={index}>
-              <Table.Cell style={matchSearchTerm(item.disease1) ? highlightStyle : {}}>
-                {item.disease1}
+              <Table.Cell>
+                <Link 
+                  href={`/disease/${encodeURIComponent(item.disease1)}`}
+                  color={isDimmed(item.disease1) ? 'fg.muted' : 'fg'}
+                  opacity={isDimmed(item.disease1) ? 0.75 : 1}
+                  fontWeight={isDimmed(item.disease1) ? 'normal' : searchTerm ? 'medium' : 'normal'}
+                  transition="all 0.2s"
+                  _hover={{ textDecoration: 'underline', textDecorationColor: 'gray.400' }}
+                >
+                  {item.disease1}
+                </Link>
               </Table.Cell>
-              <Table.Cell style={matchSearchTerm(item.disease2) ? highlightStyle : {}}>
-                {item.disease2}
+              <Table.Cell>
+                <Link 
+                  href={`/disease/${encodeURIComponent(item.disease2)}`}
+                  color={isDimmed(item.disease2) ? 'fg.muted' : 'fg'}
+                  opacity={isDimmed(item.disease2) ? 0.75 : 1}
+                  fontWeight={isDimmed(item.disease2) ? 'normal' : searchTerm ? 'medium' : 'normal'}
+                  transition="all 0.2s"
+                  _hover={{ textDecoration: 'underline', textDecorationColor: 'gray.400' }}
+                >
+                  {item.disease2}
+                </Link>
               </Table.Cell>
               <Table.Cell textAlign="center">
                 <Badge
