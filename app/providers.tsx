@@ -10,6 +10,7 @@ import "@fontsource/inter/400.css";
 export function Providers({ children }: { children: React.ReactNode }) {
   return (
     <>
+      {/* @ts-expect-error React 18 TypeScript 5.1+ JSX element mismatch */}
       <CacheProvider>
         <ChakraProvider theme={theme}>{children}</ChakraProvider>
       </CacheProvider>
