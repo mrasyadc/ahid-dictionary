@@ -1,4 +1,4 @@
-import { useColorMode } from "./ui/color-mode";
+import { useColorMode } from "@/src/components/ui/color-mode";
 import { Button, ClientOnly, Skeleton } from "@chakra-ui/react";
 import { LuMoon, LuSun } from 'react-icons/lu';
 

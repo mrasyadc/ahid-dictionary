@@ -1,6 +1,4 @@
 "use client";;
-import Image from "next/image";
-import { useColorMode } from "../src/components/ui/color-mode";
 
 import useSWR from "swr";
 import {

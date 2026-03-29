@@ -1,6 +1,6 @@
 import { Steps, Table } from "@chakra-ui/react";
 
-import TextPopover from "./TextPopover";
+import TextPopover from "@/src/components/TextPopover";
 
 export default function DataTable({ disease, isEnglish }: any) {
   if (!disease || !disease["original_text"]) return null;

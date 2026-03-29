@@ -1,6 +1,6 @@
 // src/NetworkGraph.tsx
 import React, { useRef, useEffect, memo } from 'react';
-import { useColorMode } from "./ui/color-mode";
+import { useColorMode } from "@/src/components/ui/color-mode";
 import * as d3 from 'd3';
 import { SIMILARITY_COLOR } from '@/src/constants';
 import { Steps } from '@chakra-ui/react';
