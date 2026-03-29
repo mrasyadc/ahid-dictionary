@@ -25,7 +25,7 @@ export default function DataTable({ disease, isEnglish }: any) {
               <Table.Cell width={"21ch"}>
                 {attr}
                 <TextPopover
-                  attr={attr}
+                  attr={`${attr} - Original text`}
                   text={disease?.["original_text"][attr]}
                 />
               </Table.Cell>
