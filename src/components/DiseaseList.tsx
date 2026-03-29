@@ -18,6 +18,7 @@ export default function DiseaseList({
           color: "currentColor"
         }
       }}
+      _focus={{ outline: "none" }}
       cursor="pointer"
       py={1}
     >

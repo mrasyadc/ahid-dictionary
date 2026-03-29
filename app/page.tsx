@@ -100,6 +100,7 @@ export default function Home() {
                 <Link
                   key={disease}
                   href={`/disease/${encodeURIComponent(disease)}`}
+                  _focus={{ outline: "none" }}
                 >
                   <DiseaseList key={disease}>{disease}</DiseaseList>
                 </Link>
