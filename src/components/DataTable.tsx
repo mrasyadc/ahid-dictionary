@@ -6,7 +6,7 @@ export default function DataTable({ disease, isEnglish }: any) {
   if (!disease || !disease["original_text"]) return null;
   const attributes = Object.keys(disease["original_text"]);
   return (
-    <Table.Root variant="line" marginTop={6}>
+    <Table.Root variant="line" marginTop={6} marginBottom={6}>
       <Table.Caption>
         Atlas of Human Infectious Diseases Quick Summary
       </Table.Caption>
