@@ -1,13 +1,7 @@
 // app/layout.tsx
 import { Providers } from "./providers";
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
-
-const inter = Inter({
-  subsets: ['latin'],
-  display: 'swap',
-  variable: '--font-inter',
-});
+import Script from "next/script";
 
 export const metadata: Metadata = {
   title: "Atlas of Human Infectious Disease Dictionary",
@@ -25,6 +19,11 @@ export default function RootLayout({
       <body className={inter.className}>
         <Providers>{children}</Providers>
       </body>
+      <Script
+        defer
+        src='https://umami.oculab.ai/script.js'
+        data-website-id='dfce27b1-1252-4b93-94a0-bc69bb1343f5'
+      />
     </html>
   );
 }
