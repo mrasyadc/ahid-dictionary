@@ -1,38 +1,27 @@
 "use client";;
-import { useEffect, useRef, useState, useMemo } from "react";
-import { useColorMode } from "../../src/components/ui/color-mode";
-import useSWR from "swr";
 import {
-  Steps,
-  Heading,
-  Text,
-  Button,
-  Stack,
-  Input,
-  Container,
-  Kbd,
-  Link,
-  Center,
-  List,
-  Grid,
   Box,
-  HStack,
+  Button,
   Flex,
-  Spacer,
-  SimpleGrid,
-  Spinner,
+  HStack,
+  Input,
+  Kbd,
+  Stack,
+  Text,
 } from "@chakra-ui/react";
+import NextLink from 'next/link';
+import { useEffect, useMemo,useRef, useState } from "react";
+import { LuSearch } from 'react-icons/lu';
+
+import data from "@/json/similardata.json";
 import DarkModeButton from "@/src/components/DarkModeButton";
 import SimilarityPageHeader from "@/src/components/HeaderSimilarityPage";
 import NetworkGraph from "@/src/components/SimilarityGraph";
 import SimilarityTable from "@/src/components/SimilarityTable";
-import data from "@/json/similardata.json";
-import NextLink from 'next/link';
-import { LuSearch } from 'react-icons/lu';
 import { InputGroup } from "@/src/components/ui/input-group";
-import { useModifierKey } from "@/src/hooks/useModifierKey";
-import { parseSearch, matchesRow } from "@/src/utils/parseSearch";
 import { SIMILARITY_COLOR } from "@/src/constants";
+import { useModifierKey } from "@/src/hooks/useModifierKey";
+import { matchesRow,parseSearch } from "@/src/utils/parseSearch";
 
 const EXAMPLES = ["Rubella", "Dengue, Malaria", "Rubella vs Dengue"];
 
@@ -47,8 +36,8 @@ const SimilarDisease: React.FC = () => {
         if (inputRef.current) inputRef.current.focus();
       }
     };
-    window.addEventListener('keydown', handleKeyDown);
-    return () => window.removeEventListener('keydown', handleKeyDown);
+    globalThis.addEventListener('keydown', handleKeyDown);
+    return () => globalThis.removeEventListener('keydown', handleKeyDown);
   }, []);
 
   const [searchTerm, setSearchTerm] = useState('');
@@ -57,7 +46,7 @@ const SimilarDisease: React.FC = () => {
   const filteredData = useMemo(() =>
     data
       .filter((item) => matchesRow(item.disease1, item.disease2, query))
-      .sort((a, b) => b.similarity - a.similarity)
+      .toSorted((a, b) => b.similarity - a.similarity)
       .slice(0, 20),
     [query]
   );

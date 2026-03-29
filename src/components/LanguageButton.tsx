@@ -1,7 +1,5 @@
-import { useColorMode } from "./ui/color-mode";
-import { Steps, Button, Stack } from "@chakra-ui/react";
+import { Button } from "@chakra-ui/react";
 import { MouseEventHandler } from "react";
-import { LuMoon, LuSun } from 'react-icons/lu';
 
 export default function LanguageButton({
   isEnglish,

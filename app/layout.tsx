@@ -1,10 +1,12 @@
 // app/layout.tsx
-import { Provider } from "@/src/components/ui/provider";
-import type { Metadata } from "next";
-import Script from "next/script";
 import "@fontsource/inter/700.css";
 import "@fontsource/inter/400.css";
 import "@/app/globals.css";
+
+import type { Metadata } from "next";
+import Script from "next/script";
+
+import { Provider } from "@/src/components/ui/provider";
 
 export const metadata: Metadata = {
   title: "Atlas of Human Infectious Disease Dictionary"

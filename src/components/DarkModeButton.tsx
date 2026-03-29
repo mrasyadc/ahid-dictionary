@@ -1,6 +1,7 @@
-import { useColorMode } from "@/src/components/ui/color-mode";
 import { Button, ClientOnly, Skeleton } from "@chakra-ui/react";
 import { LuMoon, LuSun } from 'react-icons/lu';
+
+import { useColorMode } from "@/src/components/ui/color-mode";
 
 export default function DarkModeButton() {
   const { colorMode, toggleColorMode } = useColorMode();

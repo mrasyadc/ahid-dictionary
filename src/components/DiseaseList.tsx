@@ -1,5 +1,6 @@
 import { Flex, Text } from "@chakra-ui/react";
 import { LuArrowRight } from 'react-icons/lu';
+
 import { SIMILARITY_COLOR } from "@/src/constants";
 
 export default function DiseaseList({

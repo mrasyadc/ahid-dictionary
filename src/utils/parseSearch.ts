@@ -10,13 +10,16 @@ export function parseSearch(raw: string): SearchQuery {
   if (!trimmed) return { mode: 'empty' };
 
   // Pair mode: "Rubella vs Dengue"
-  const vsMatch = trimmed.match(/^(.+?)\s+vs\s+(.+)$/i);
-  if (vsMatch) {
-    return {
-      mode: 'pair',
-      termA: vsMatch[1].trim(),
-      termB: vsMatch[2].trim(),
-    };
+  const vsLower = trimmed.toLowerCase();
+  if (vsLower.includes(' vs ')) {
+    const vsParts = trimmed.split(/ vs /i);
+    if (vsParts.length === 2) {
+      return {
+        mode: 'pair',
+        termA: vsParts[0].trim(),
+        termB: vsParts[1].trim(),
+      };
+    }
   }
 
   // Multi mode: "Rubella, Dengue" or "Rubella,Dengue"
@@ -33,13 +36,17 @@ export function parseSearch(raw: string): SearchQuery {
 export function matchesSingle(name: string, query: SearchQuery): boolean {
   const lower = name.toLowerCase();
   switch (query.mode) {
-    case 'empty':  return true;
-    case 'single': return lower.includes(query.term.toLowerCase());
-    case 'multi':  return query.terms.some(t => lower.includes(t.toLowerCase()));
-    case 'pair':   return (
+    case 'empty': {  return true;
+    }
+    case 'single': { return lower.includes(query.term.toLowerCase());
+    }
+    case 'multi': {  return query.terms.some(t => lower.includes(t.toLowerCase()));
+    }
+    case 'pair': {   return (
       lower.includes(query.termA.toLowerCase()) ||
       lower.includes(query.termB.toLowerCase())
     );
+    }
   }
 }
 
@@ -53,16 +60,18 @@ export function matchesRow(
   const l2 = d2.toLowerCase();
 
   switch (query.mode) {
-    case 'empty':
+    case 'empty': {
       return true;
+    }
     case 'single': {
       const t = query.term.toLowerCase();
       return l1.includes(t) || l2.includes(t);
     }
-    case 'multi':
+    case 'multi': {
       return query.terms.some(
         t => l1.includes(t.toLowerCase()) || l2.includes(t.toLowerCase())
       );
+    }
     case 'pair': {
       const a = query.termA.toLowerCase();
       const b = query.termB.toLowerCase();

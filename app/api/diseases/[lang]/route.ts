@@ -1,6 +1,7 @@
-import { userAgent, NextRequest, NextResponse } from "next/server";
-import path from "path";
-import { promises as fs } from "fs";
+import { promises as fs } from "node:fs";
+import path from "node:path";
+
+import { NextRequest, NextResponse } from "next/server";
 
 export async function GET(
   request: NextRequest,
@@ -19,11 +20,7 @@ export async function GET(
 
   let fileContents;
 
-  if (lang == "en") {
-    fileContents = await fs.readFile(jsonDirectory + "/data.json", "utf8");
-  } else {
-    fileContents = await fs.readFile(jsonDirectory + "/data_id.json", "utf8");
-  }
+  fileContents = await (lang == "en" ? fs.readFile(jsonDirectory + "/data.json", "utf8") : fs.readFile(jsonDirectory + "/data_id.json", "utf8"));
   //Return the content of the data file in json format
 
   return NextResponse.json(JSON.parse(fileContents));

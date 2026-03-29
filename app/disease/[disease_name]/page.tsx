@@ -1,6 +1,7 @@
-import path from "path";
-import { promises as fs } from "fs";
-import DiseaseClient from "./DiseaseClient";
+import { promises as fs } from "node:fs";
+import path from "node:path";
+
+import DiseaseClient from "@/app/disease/[disease_name]/DiseaseClient";
 
 /**
  * Generates the static paths for all diseases at build time.

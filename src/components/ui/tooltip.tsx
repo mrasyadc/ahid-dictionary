@@ -1,4 +1,4 @@
-import { Steps, Portal } from "@chakra-ui/react";
+import { Portal } from "@chakra-ui/react";
 import { Tooltip as ChakraTooltip } from "@chakra-ui/react";
 import * as React from "react"
 

@@ -1,40 +1,30 @@
 "use client";;
 
-import useSWR from "swr";
 import {
-  Steps,
-  Heading,
-  Text,
+  Box,
   Button,
-  Stack,
+  Flex,
+  HStack,
   Input,
-  Container,
   Kbd,
   Link,
-  Center,
-
-  List,
-  Grid,
-  Box,
-  HStack,
-  Flex,
-  Spacer,
   SimpleGrid,
   Spinner,
+  Stack,
+  Text,
 } from "@chakra-ui/react";
-import { useKeyPress } from "../src/hooks/useKeyPress";
-import { useEffect, useRef, useState, useMemo } from "react";
-import DarkModeButton from "@/src/components/DarkModeButton";
-import DataTable from "@/src/components/DataTable";
-import DiseaseList from "@/src/components/DiseaseList";
-import LanguageButton from "@/src/components/LanguageButton";
-import Header from "@/src/components/Header";
 import NextLink from 'next/link';
-import { LuExternalLink, LuSearch, LuSun } from 'react-icons/lu';
+import { useEffect, useMemo,useRef, useState } from "react";
+import { LuSearch } from 'react-icons/lu';
+import useSWR from "swr";
+
+import DarkModeButton from "@/src/components/DarkModeButton";
+import DiseaseList from "@/src/components/DiseaseList";
+import Header from "@/src/components/Header";
 import { InputGroup } from "@/src/components/ui/input-group";
-import { useModifierKey } from "@/src/hooks/useModifierKey";
-import { parseSearch, matchesSingle } from "@/src/utils/parseSearch";
 import { SIMILARITY_COLOR } from "@/src/constants";
+import { useModifierKey } from "@/src/hooks/useModifierKey";
+import { matchesSingle,parseSearch } from "@/src/utils/parseSearch";
 
 const EXAMPLES = ["Dengue", "Malaria, Rabies", "Hepatitis"];
 
@@ -54,16 +44,15 @@ export default function Home() {
       }
     };
 
-    window.addEventListener('keydown', handleKeyDown);
-    return () => window.removeEventListener('keydown', handleKeyDown);
+    globalThis.addEventListener('keydown', handleKeyDown);
+    return () => globalThis.removeEventListener('keydown', handleKeyDown);
   }, []);
 
-  const [diseasesKey, setDiseasesKey] = useState();
   const [searchTerm, setSearchTerm] = useState("");
 
-  const { data, error, isLoading } = useSWR("/api/diseases/en", fetcher);
+  const { data, isLoading } = useSWR("/api/diseases/en", fetcher);
 
-  const query = useMemo(() => parseSearch(searchTerm), [searchTerm, data, isLoading]);
+  const query = useMemo(() => parseSearch(searchTerm), [searchTerm]);
 
   const diseases = useMemo(() => {
     if (isLoading || !data) return [""];

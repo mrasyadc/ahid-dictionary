@@ -1,4 +1,4 @@
-import { Steps, Heading, Link, Text, Icon } from "@chakra-ui/react";
+import { Heading, Icon,Link, Text } from "@chakra-ui/react";
 import { LuExternalLink } from 'react-icons/lu';
 
 export default function Header() {

@@ -1,13 +1,16 @@
 "use client";
 
-import { useState, use } from "react";
+import { Box,Flex, Spinner, Stack } from "@chakra-ui/react";
+import { use,useState } from "react";
+import useSWR from "swr";
+
 import BackButton from "@/src/components/BackButton";
 import DarkModeButton from "@/src/components/DarkModeButton";
 import DataTable from "@/src/components/DataTable";
 import Header from "@/src/components/Header";
 import LanguageButton from "@/src/components/LanguageButton";
-import { Spinner, Stack, Flex, Box } from "@chakra-ui/react";
-import useSWR from "swr";
+
+const fetcher = (url: string) => fetch(url).then((res) => res.json());
 
 export default function DiseaseClient({
   params,
@@ -17,8 +20,6 @@ export default function DiseaseClient({
   let { disease_name } = use(params);
   disease_name = decodeURIComponent(disease_name);
 
-  const fetcher = (url: string) => fetch(url).then((res) => res.json());
-  
   const {
     data: data_en,
     isLoading: isLoading_en,

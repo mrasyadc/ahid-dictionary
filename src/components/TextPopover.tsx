@@ -1,4 +1,4 @@
-import { HoverCard, Icon, Box, Text, Heading } from "@chakra-ui/react";
+import { Box, Heading,HoverCard, Icon, Text } from "@chakra-ui/react";
 import { LuInfo } from 'react-icons/lu';
 
 interface TextPopoverProps {

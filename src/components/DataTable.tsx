@@ -1,4 +1,4 @@
-import { Steps, Table } from "@chakra-ui/react";
+import { Table } from "@chakra-ui/react";
 
 import TextPopover from "@/src/components/TextPopover";
 

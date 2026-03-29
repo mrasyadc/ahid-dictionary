@@ -1,11 +1,10 @@
 // src/NetworkGraph.tsx
-import React, { useRef, useEffect, memo } from 'react';
-import { useColorMode } from "@/src/components/ui/color-mode";
 import * as d3 from 'd3';
-import { SIMILARITY_COLOR } from '@/src/constants';
-import { Steps } from '@chakra-ui/react';
+import React, { memo,useEffect, useRef } from 'react';
 
-import { Tooltip } from '@/src/components/ui/tooltip';
+import { useColorMode } from "@/src/components/ui/color-mode";
+import { SIMILARITY_COLOR } from '@/src/constants';
+
 
 interface Link {
   source: string;
@@ -43,7 +42,7 @@ const NetworkGraph: React.FC<NetworkGraphProps> = ({ data }) => {
         y: height / 2
       };
 
-    const nodes: Node[] = Array.from(new Set(data.flatMap(d => [d.disease1, d.disease2])))
+    const nodes: Node[] = [...new Set(data.flatMap(d => [d.disease1, d.disease2]))]
       .map(d => ({ id: d, x: 0, y: 0 }));
 
     const links: Link[] = data.map(d => ({
@@ -56,12 +55,12 @@ const NetworkGraph: React.FC<NetworkGraphProps> = ({ data }) => {
       .domain(nodes.map(d => d.id))
       .range([0, 2 * Math.PI]);
 
-    nodes.forEach((node, _) => {
+    for (const node of nodes) {
       const angle: number | undefined = scale(node.id);
       const defaultAngle: number = 0; // Add a default value for the angle
-      node.x = center.x + Math.cos(angle ?? defaultAngle) * width / 3; // Use the default value if angle is undefined
-      node.y = center.y + Math.sin(angle ?? defaultAngle) * height / 3; // Use the default value if angle is undefined
-    });
+      node.x = center.x + Math.cos(angle ?? defaultAngle) * (width / 3); // Use the default value if angle is undefined
+      node.y = center.y + Math.sin(angle ?? defaultAngle) * (height / 3); // Use the default value if angle is undefined
+    }
 
     const simulation = d3.forceSimulation(nodes as any)
       .force('link', d3.forceLink(links).id((d: any) => d.id).distance(100))

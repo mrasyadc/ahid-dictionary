@@ -1,4 +1,5 @@
 import { useEffect } from "react";
+
 import { useLocalStorage } from "@/src/hooks/useLocalStorage";
 
 /**
@@ -10,10 +11,10 @@ export const useModifierKey = (): string => {
 
   useEffect(() => {
     // Detect OS if we're on the client
-    if (typeof window !== "undefined") {
+    if (globalThis.window !== undefined) {
       const isMac = 
-        navigator.platform.toUpperCase().indexOf("MAC") >= 0 || 
-        navigator.userAgent.toUpperCase().indexOf("MAC") >= 0;
+        navigator.platform.toUpperCase().includes("MAC") || 
+        navigator.userAgent.toUpperCase().includes("MAC");
       
       const detected = isMac ? "Cmd" : "Alt";
       

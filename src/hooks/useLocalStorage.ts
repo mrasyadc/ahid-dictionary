@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect, useCallback } from "react";
+import { useCallback,useEffect, useState } from "react";
 
 /**
  * A hook that synchronization state with localStorage.
@@ -20,11 +20,12 @@ export function useLocalStorage<T>(key: string, initialValue: T) {
 
   // Once the component is mounted on the client, read from localStorage
   useEffect(() => {
-    if (typeof window === "undefined") return;
+    if (globalThis.window === undefined) return;
 
     try {
-      const item = window.localStorage.getItem(key);
+      const item = globalThis.localStorage.getItem(key);
       if (item) {
+        // eslint-disable-next-line react-hooks/set-state-in-effect
         setStoredValue(JSON.parse(item));
       }
     } catch (error) {
@@ -39,7 +40,7 @@ export function useLocalStorage<T>(key: string, initialValue: T) {
       try {
         // Allow value to be a function so we have same API as useState
         const valueToStore =
-          value instanceof Function ? value(storedValue) : value;
+          typeof value === 'function' ? (value as (val: T) => T)(storedValue) : value;
         
         // Save state
         setStoredValue(valueToStore);
@@ -48,13 +49,13 @@ export function useLocalStorage<T>(key: string, initialValue: T) {
         sessionCache.set(key, valueToStore);
 
         // Save to local storage
-        if (typeof window !== "undefined") {
-          window.localStorage.setItem(key, JSON.stringify(valueToStore));
+        if (globalThis.window !== undefined) {
+          globalThis.localStorage.setItem(key, JSON.stringify(valueToStore));
         }
 
         // Dispatch a custom event so other instances of the same hook
         // in different components can update their state.
-        window.dispatchEvent(new Event("local-storage"));
+        globalThis.dispatchEvent(new Event("local-storage"));
       } catch (error) {
         console.warn(`Error setting localStorage key "${key}":`, error);
       }
@@ -66,21 +67,21 @@ export function useLocalStorage<T>(key: string, initialValue: T) {
   useEffect(() => {
     const handleStorageChange = () => {
       try {
-        const item = window.localStorage.getItem(key);
+        const item = globalThis.localStorage.getItem(key);
         if (item) {
           setStoredValue(JSON.parse(item));
         }
-      } catch (e) {
+      } catch {
         // silent
       }
     };
 
-    window.addEventListener("storage", handleStorageChange);
-    window.addEventListener("local-storage", handleStorageChange);
+    globalThis.addEventListener("storage", handleStorageChange);
+    globalThis.addEventListener("local-storage", handleStorageChange);
 
     return () => {
-      window.removeEventListener("storage", handleStorageChange);
-      window.removeEventListener("local-storage", handleStorageChange);
+      globalThis.removeEventListener("storage", handleStorageChange);
+      globalThis.removeEventListener("local-storage", handleStorageChange);
     };
   }, [key]);
 
