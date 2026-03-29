@@ -36,22 +36,21 @@ import { LuSearch } from 'react-icons/lu';
 import { InputGroup } from "@/src/components/ui/input-group";
 
 const SimilarDisease: React.FC = () => {
-  const altPressed = useKeyPress("Alt");
-  const kPressed = useKeyPress("k");
-
   const inputRef = useRef<HTMLInputElement>(null);
 
-  const setFocus = (): void => {
-    if (inputRef.current) {
-      inputRef.current.focus();
-    }
-  };
-
   useEffect(() => {
-    if (altPressed && kPressed) {
-      setFocus();
-    }
-  }, [kPressed, altPressed]);
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if ((e.metaKey || e.altKey) && e.key === 'k') {
+        e.preventDefault();
+        if (inputRef.current) {
+          inputRef.current.focus();
+        }
+      }
+    };
+
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, []);
 
   const [searchTerm, setSearchTerm] = useState('');
 
