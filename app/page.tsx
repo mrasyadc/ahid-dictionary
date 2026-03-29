@@ -34,11 +34,13 @@ import Header from "@/src/components/Header";
 import NextLink from 'next/link';
 import { LuExternalLink, LuSearch, LuSun } from 'react-icons/lu';
 import { InputGroup } from "@/src/components/ui/input-group";
+import { useModifierKey } from "@/src/hooks/useModifierKey";
 
 const fetcher = (url: string) => fetch(url).then((res) => res.json());
 
 export default function Home() {
   const inputRef = useRef<HTMLInputElement>(null);
+  const modifierKey = useModifierKey();
 
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
@@ -77,7 +79,7 @@ export default function Home() {
       <Flex justify="center" mt={10} w="full" px={4}>
         <InputGroup
           startElement={<LuSearch />}
-          endElement={<><Kbd>Alt</Kbd>+<Kbd>K</Kbd></>}
+          endElement={<><Kbd>{modifierKey}</Kbd>+<Kbd>K</Kbd></>}
           maxWidth="37.5rem"
           width="100%"
         >
