@@ -15,16 +15,14 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <head>
+      <body suppressHydrationWarning>
+        <Provider>{children}</Provider>
         <Script
           defer
           src='https://umami.oculab.ai/script.js'
           data-website-id='dfce27b1-1252-4b93-94a0-bc69bb1343f5'
           strategy="afterInteractive"
         />
-      </head>
-      <body suppressHydrationWarning>
-        <Provider>{children}</Provider>
       </body>
     </html>
   );

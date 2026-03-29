@@ -90,7 +90,7 @@ export default function Home() {
         </InputGroup>
       </Flex>
       <Flex justify="center" w="full" mb={20} mt={10} px={4}>
-        <Box maxWidth="100ch" width="100%">
+        <Box maxWidth="700px" width="100%">
           <SimpleGrid columns={[1, null, 2]} gap={4}>
           {isLoading && <Spinner />}
           {!isLoading &&
