@@ -1,7 +1,7 @@
 "use client"
 
 import { Steps, ChakraProvider } from "@chakra-ui/react";
-import { system } from "../../../theme";
+import { system } from "@/theme";
 import {
   ColorModeProvider,
   type ColorModeProviderProps,

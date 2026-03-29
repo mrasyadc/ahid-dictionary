@@ -4,11 +4,8 @@ import { LuExternalLink } from 'react-icons/lu';
 export default function SimilarityPageHeader() {
   return (
     <>
-      <Heading fontSize={"48px"} fontWeight={700} as="h1" textAlign={"center"}>
-        Atlas of Human Infectious Disease
-      </Heading>
-      <Heading fontSize={"48px"} fontWeight={700} as="h1" textAlign={"center"}>
-        Dictionary
+      <Heading fontSize={"48px"} fontWeight={700} as="h1" textAlign={"center"} lineHeight="1.2" mb={4}>
+        Atlas of Human Infectious Disease<br/>Dictionary
       </Heading>
       <Text textAlign={"center"}>
         Thesis Supervisor 1{" "}

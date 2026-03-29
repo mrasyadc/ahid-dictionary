@@ -74,34 +74,33 @@ const SimilarDisease: React.FC = () => {
                   </NextLink></Button>
       </Stack>
       <SimilarityPageHeader />
-      <Container marginTop={10}>
+      <Flex justify="center" mt={10} w="full" px={4}>
         <InputGroup
           startElement={<LuSearch />}
           endElement={<><Kbd>Alt</Kbd>+<Kbd>K</Kbd></>}
+          maxWidth="600px"
+          width="100%"
         >
           <Input
             placeholder="Search diseases or keywords"
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
-            mb={4}
             ref={inputRef} // Attach ref to the input field
           />
         </InputGroup>
-      </Container>
-      <Container centerContent>
+      </Flex>
+      <Flex direction="column" align="center" w="full" mb={20} mt={10} px={4}>
         {filteredData.length > 0 ? (
           <NetworkGraph data={filteredData} />
         ) : (
           <Text>No data available</Text>
         )}
-      </Container>
-      <Container>
-        {filteredData.length > 0 ? (
-          <SimilarityTable data={filteredData} searchTerm={searchTerm} />
-        ) : null}
-      </Container>
-      <Container maxWidth={"100ch"} centerContent={true} marginBottom={20}>
-      </Container>
+        <Box maxWidth="100ch" width="100%" mt={10}>
+          {filteredData.length > 0 ? (
+            <SimilarityTable data={filteredData} searchTerm={searchTerm} />
+          ) : null}
+        </Box>
+      </Flex>
     </>
   );
 };

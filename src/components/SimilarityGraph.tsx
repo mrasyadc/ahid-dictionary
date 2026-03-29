@@ -34,10 +34,7 @@ const NetworkGraph: React.FC<NetworkGraphProps> = ({ data }) => {
     if (!data) return;
 
     d3.select(svgRef.current).selectAll('*').remove();
-    const svg = d3.select(svgRef.current as Element)
-        .call(d3.zoom().on('zoom', (event) => {
-            svg.attr('transform', event.transform);
-          }));
+    const svg = d3.select(svgRef.current as Element);
     const width = 600;
     const height = 400;
     const center = {

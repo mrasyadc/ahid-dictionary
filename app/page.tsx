@@ -75,10 +75,12 @@ export default function Home() {
                   </NextLink></Button>
       </Stack>
       <Header />
-      <Container marginTop={10}>
+      <Flex justify="center" mt={10} w="full" px={4}>
         <InputGroup
           startElement={<LuSearch />}
           endElement={<><Kbd>Alt</Kbd>+<Kbd>K</Kbd></>}
+          maxWidth="600px"
+          width="100%"
         >
           <Input
             placeholder="Search diseases or keywords"
@@ -86,9 +88,10 @@ export default function Home() {
             onChange={(e) => setSearchTerm(e.target.value)}
           />
         </InputGroup>
-      </Container>
-      <Container maxWidth={"100ch"} centerContent={true} marginBottom={20}>
-        <SimpleGrid columns={[1, null, 2]} gap={4} marginTop={10}>
+      </Flex>
+      <Flex justify="center" w="full" mb={20} mt={10} px={4}>
+        <Box maxWidth="100ch" width="100%">
+          <SimpleGrid columns={[1, null, 2]} gap={4}>
           {isLoading && <Spinner />}
           {!isLoading &&
             diseases[0] !== "" &&
@@ -103,7 +106,8 @@ export default function Home() {
               );
             })}
         </SimpleGrid>
-      </Container>
+        </Box>
+      </Flex>
     </>
   );
 }
