@@ -2,6 +2,7 @@
 import React, { useRef, useEffect, memo } from 'react';
 import { useColorMode } from "./ui/color-mode";
 import * as d3 from 'd3';
+import { SIMILARITY_COLOR } from '@/src/constants';
 import { Steps } from '@chakra-ui/react';
 
 import { Tooltip } from '@/src/components/ui/tooltip';
@@ -118,7 +119,7 @@ const NetworkGraph: React.FC<NetworkGraphProps> = ({ data }) => {
       .data(nodes)
       .join('circle')
       .attr('r', 5)
-      .attr('fill', '#69b3a2')
+      .attr('fill', SIMILARITY_COLOR)
       .on('mouseover', mouseover)
       .on('mouseout', mouseout)
       .call(d3.drag<SVGCircleElement, Node>()
