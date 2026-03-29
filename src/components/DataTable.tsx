@@ -38,12 +38,6 @@ export default function DataTable({ disease, isEnglish }: any) {
           );
         })}
       </Table.Body>
-      <Table.Footer>
-        <Table.Row>
-          <Table.ColumnHeader>Subjects</Table.ColumnHeader>
-          <Table.ColumnHeader>Quick Description</Table.ColumnHeader>
-        </Table.Row>
-      </Table.Footer>
     </Table.Root>
   );
 }
