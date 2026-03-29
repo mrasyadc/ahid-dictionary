@@ -1,19 +1,30 @@
 import React from 'react';
 import { Steps, Table, Box, Badge, HStack, Text, Link } from '@chakra-ui/react';
 import { SIMILARITY_COLOR } from '@/src/constants';
+import { SearchQuery } from '@/src/utils/parseSearch';
 
 interface DiseaseTableProps {
   data: { disease1: string; disease2: string; similarity: number }[];
-  searchTerm: string;
+  query: SearchQuery;
 }
 
-const DiseaseTable: React.FC<DiseaseTableProps> = ({ data, searchTerm }) => {
-  const isDimmed = (text: string): boolean => {
-    // If there's no search term, nothing is dimmed (everything is 'fg')
-    if (!searchTerm || searchTerm.trim() === '') return false;
-    // Dim the text only if it does NOT match the search term
-    return !text.toLowerCase().includes(searchTerm.toLowerCase());
+const DiseaseTable: React.FC<DiseaseTableProps> = ({ data, query }) => {
+  // Returns true if this specific cell's text should be pushed back
+  const isDimmed = (text: string, role?: 'termA' | 'termB'): boolean => {
+    if (query.mode === 'empty') return false;
+    const lower = text.toLowerCase();
+    if (query.mode === 'single') return !lower.includes(query.term.toLowerCase());
+    if (query.mode === 'multi') return !query.terms.some(t => lower.includes(t.toLowerCase()));
+    if (query.mode === 'pair') {
+      // In pair mode, dim disease1 if it matches neither termA nor termB
+      const matchesA = lower.includes(query.termA.toLowerCase());
+      const matchesB = lower.includes(query.termB.toLowerCase());
+      return !matchesA && !matchesB;
+    }
+    return false;
   };
+
+  const hasSearch = query.mode !== 'empty';
 
   // Mathematically interpolate the color using pure RGB blending
   const getContinuousColor = (similarity: number) => {
@@ -46,9 +57,9 @@ const DiseaseTable: React.FC<DiseaseTableProps> = ({ data, searchTerm }) => {
                   href={`/disease/${encodeURIComponent(item.disease1)}`}
                   color={isDimmed(item.disease1) ? 'fg.muted' : 'fg'}
                   opacity={isDimmed(item.disease1) ? 0.75 : 1}
-                  fontWeight={isDimmed(item.disease1) ? 'normal' : searchTerm ? 'medium' : 'normal'}
+                  fontWeight={isDimmed(item.disease1) ? 'normal' : hasSearch ? 'medium' : 'normal'}
                   transition="all 0.2s"
-                  _hover={{ textDecoration: 'underline', textDecorationColor: 'gray.400' }}
+                  _hover={{ color: SIMILARITY_COLOR, textDecoration: 'underline', textDecorationColor: SIMILARITY_COLOR }}
                 >
                   {item.disease1}
                 </Link>
@@ -58,9 +69,9 @@ const DiseaseTable: React.FC<DiseaseTableProps> = ({ data, searchTerm }) => {
                   href={`/disease/${encodeURIComponent(item.disease2)}`}
                   color={isDimmed(item.disease2) ? 'fg.muted' : 'fg'}
                   opacity={isDimmed(item.disease2) ? 0.75 : 1}
-                  fontWeight={isDimmed(item.disease2) ? 'normal' : searchTerm ? 'medium' : 'normal'}
+                  fontWeight={isDimmed(item.disease2) ? 'normal' : hasSearch ? 'medium' : 'normal'}
                   transition="all 0.2s"
-                  _hover={{ textDecoration: 'underline', textDecorationColor: 'gray.400' }}
+                  _hover={{ color: SIMILARITY_COLOR, textDecoration: 'underline', textDecorationColor: SIMILARITY_COLOR }}
                 >
                   {item.disease2}
                 </Link>

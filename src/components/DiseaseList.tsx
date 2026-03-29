@@ -1,5 +1,6 @@
 import { Flex, Text } from "@chakra-ui/react";
 import { LuArrowRight } from 'react-icons/lu';
+import { SIMILARITY_COLOR } from "@/src/constants";
 
 export default function DiseaseList({
   children,
@@ -12,7 +13,9 @@ export default function DiseaseList({
       color="fg.muted"
       transition="all 0.2s"
       _hover={{
-        color: "fg",
+        color: SIMILARITY_COLOR,
+        textDecoration: 'underline',
+        textDecorationColor: SIMILARITY_COLOR,
         "& > svg": {
           transform: "translateX(0.375rem)",
           color: "currentColor"
