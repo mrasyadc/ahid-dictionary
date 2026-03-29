@@ -151,12 +151,12 @@ const NetworkGraph: React.FC<NetworkGraphProps> = ({ data }) => {
         .attr('y', d => (d as any).y);
     });
 
-    function mouseover(this: any) {
-      d3.select(this).style('cursor', 'pointer');
+    function mouseover(event: any) {
+      d3.select(event.currentTarget).style('cursor', 'pointer');
     }
 
-    function mouseout(this: any) {
-      d3.select(this).style('cursor', 'default');
+    function mouseout(event: any) {
+      d3.select(event.currentTarget).style('cursor', 'default');
     }
 
     function dragstarted(event: any, d: any) {

@@ -29,7 +29,7 @@ import {
 } from "@chakra-ui/react";
 import { ExternalLinkIcon, Search2Icon, SunIcon } from "@chakra-ui/icons";
 import { useKeyPress } from "../src/hooks/useKeyPress";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState, useMemo } from "react";
 import DarkModeButton from "@/src/components/DarkModeButton";
 import DataTable from "@/src/components/DataTable";
 import DiseaseList from "@/src/components/DiseaseList";
@@ -57,26 +57,17 @@ export default function Home(): JSX.Element {
     }
   }, [kPressed, altPressed]);
 
-  const [diseases, setDiseases] = useState([""]);
   const [diseasesKey, setDiseasesKey] = useState();
   const [searchTerm, setSearchTerm] = useState("");
 
   const { data, error, isLoading } = useSWR("/api/diseases/en", fetcher);
 
-  useEffect(() => {
-    if (!isLoading) {
-      setDiseases(Object.keys(data));
-    }
-  }, [data, isLoading]);
-
-  useEffect(() => {
-    if (!isLoading) {
-      const results = Object.keys(data).filter((disease) => {
-        return disease.toLowerCase().includes(searchTerm.toLowerCase());
-      });
-      setDiseases(results);
-    }
-  }, [searchTerm, isLoading, data]);
+  const diseases = useMemo(() => {
+    if (isLoading || !data) return [""];
+    return Object.keys(data).filter((disease) => {
+      return disease.toLowerCase().includes(searchTerm.toLowerCase());
+    });
+  }, [data, isLoading, searchTerm]);
 
   return (
     <>
