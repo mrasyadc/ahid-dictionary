@@ -4,7 +4,7 @@ import type { Metadata } from "next";
 import Script from "next/script";
 import "@fontsource/inter/700.css";
 import "@fontsource/inter/400.css";
-import "./globals.css";
+import "@/app/globals.css";
 
 export const metadata: Metadata = {
   title: "Atlas of Human Infectious Disease Dictionary"

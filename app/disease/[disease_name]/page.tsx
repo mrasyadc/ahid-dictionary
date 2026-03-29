@@ -1,86 +1,27 @@
-"use client";
-import { useEffect, useState, use } from "react";
-import BackButton from "@/src/components/BackButton";
-import DarkModeButton from "@/src/components/DarkModeButton";
-import DataTable from "@/src/components/DataTable";
-import DiseaseList from "@/src/components/DiseaseList";
-import Header from "@/src/components/Header";
-import LanguageButton from "@/src/components/LanguageButton";
-import { Steps, Spinner, Button, Container, Heading, Link, SimpleGrid, Stack, Text, Flex, Box } from "@chakra-ui/react";
-import useSWR from "swr";
+import path from "path";
+import { promises as fs } from "fs";
+import DiseaseClient from "./DiseaseClient";
 
-import { LuExternalLink } from 'react-icons/lu';
-// import { Metadata, ResolvingMetadata } from "next";
+/**
+ * Generates the static paths for all diseases at build time.
+ * Reads the disease names from data.json to pre-render each page.
+ */
+export async function generateStaticParams() {
+  const jsonDirectory = path.join(process.cwd(), "json");
+  const fileContents = await fs.readFile(path.join(jsonDirectory, "data.json"), "utf8");
+  const data = JSON.parse(fileContents);
 
-// type Props = {
-//   params: { disease_name: string };
-// };
+  // Return an array of objects matching the route parameter [disease_name]
+  return Object.keys(data).map((disease) => ({
+    disease_name: encodeURIComponent(disease),
+  }));
+}
 
-// export async function generateMetadata({ params }: Props): Promise<Metadata> {
-//   // read route params
-//   const disease_name = params.disease_name;
-
-//   console.log(disease_name);
-
-//   return {
-//     title: `${disease_name} - Atlas of Human Infectious Disease`,
-//   };
-// }
-
-export default function Disease({
+export default async function DiseasePage({
   params,
 }: {
   params: Promise<{ disease_name: string }>;
 }) {
-  let { disease_name } = use(params);
-  disease_name = decodeURIComponent(disease_name);
-
-  const fetcher = (url: string) => fetch(url).then((res) => res.json());
-  const {
-    data: data_en,
-    error: error_en,
-    isLoading: isLoading_en,
-  } = useSWR("/api/diseases/en", fetcher);
-  const {
-    data: data_id,
-    error: error_id,
-    isLoading: isLoading_id,
-  } = useSWR("/api/diseases/id", fetcher);
-  const [isEnglish, setLanguage] = useState(true);
-
-  return (
-    <>
-      <Stack direction={"row-reverse"} padding={6}>
-        <DarkModeButton />
-        <LanguageButton
-          isEnglish={isEnglish}
-          onClick={() => {
-            setLanguage(!isEnglish);
-          }}
-        />
-      </Stack>
-
-      <Header />
-      <Flex direction="column" align="center" w="full" mb={20} mt={10} px={4}>
-        <Box maxWidth="100ch" width="100%">
-          <BackButton />
-          {isEnglish ? (
-            <>
-              {isLoading_en && <Spinner />}
-              {!isLoading_en && (
-                <DataTable isEnglish={isEnglish} disease={data_en[disease_name]} />
-              )}
-            </>
-          ) : (
-            <>
-              {isLoading_id && <Spinner />}
-              {!isLoading_id && (
-                <DataTable isEnglish={isEnglish} disease={data_id[disease_name]} />
-              )}
-            </>
-          )}
-        </Box>
-      </Flex>
-    </>
-  );
+  // Pass the params promise to the client component
+  return <DiseaseClient params={params} />;
 }
