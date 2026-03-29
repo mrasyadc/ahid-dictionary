@@ -6,7 +6,7 @@ import DataTable from "@/src/components/DataTable";
 import DiseaseList from "@/src/components/DiseaseList";
 import Header from "@/src/components/Header";
 import LanguageButton from "@/src/components/LanguageButton";
-import { Steps, Spinner, Button, Container, Heading, Link, SimpleGrid, Stack, Text } from "@chakra-ui/react";
+import { Steps, Spinner, Button, Container, Heading, Link, SimpleGrid, Stack, Text, Flex, Box } from "@chakra-ui/react";
 import useSWR from "swr";
 
 import { LuExternalLink } from 'react-icons/lu';
@@ -61,25 +61,26 @@ export default function Disease({
       </Stack>
 
       <Header />
-      {isEnglish && (
-        <Container marginTop={10}>
+      <Flex direction="column" align="center" w="full" mb={20} mt={10} px={4}>
+        <Box maxWidth="100ch" width="100%">
           <BackButton />
-          {isLoading_en && <Spinner />}
-          {!isLoading_en && (
-            <DataTable isEnglish={isEnglish} disease={data_en[disease_name]} />
+          {isEnglish ? (
+            <>
+              {isLoading_en && <Spinner />}
+              {!isLoading_en && (
+                <DataTable isEnglish={isEnglish} disease={data_en[disease_name]} />
+              )}
+            </>
+          ) : (
+            <>
+              {isLoading_id && <Spinner />}
+              {!isLoading_id && (
+                <DataTable isEnglish={isEnglish} disease={data_id[disease_name]} />
+              )}
+            </>
           )}
-        </Container>
-      )}
-
-      {!isEnglish && (
-        <Container marginTop={10}>
-          <BackButton />
-          {isLoading_id && <Spinner />}
-          {!isLoading_id && (
-            <DataTable isEnglish={isEnglish} disease={data_id[disease_name]} />
-          )}
-        </Container>
-      )}
+        </Box>
+      </Flex>
     </>
   );
 }
