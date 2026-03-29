@@ -1,5 +1,5 @@
 // app/layout.tsx
-import { Providers } from "./providers";
+import { Provider } from "@/src/components/ui/provider";
 import type { Metadata } from "next";
 import Script from "next/script";
 
@@ -12,15 +12,15 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en">
-      <body>
-        <Providers>{children}</Providers>
+    <html lang="en" suppressHydrationWarning>
+      <body suppressHydrationWarning>
+        <Provider>{children}</Provider>
+        <Script
+          defer
+          src='https://umami.oculab.ai/script.js'
+          data-website-id='dfce27b1-1252-4b93-94a0-bc69bb1343f5'
+        />
       </body>
-      <Script
-        defer
-        src='https://umami.oculab.ai/script.js'
-        data-website-id='dfce27b1-1252-4b93-94a0-bc69bb1343f5'
-      />
     </html>
   );
 }

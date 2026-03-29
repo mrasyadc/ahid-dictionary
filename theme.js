@@ -1,14 +1,21 @@
 // 1. Import `extendTheme`
-import { extendTheme } from "@chakra-ui/react";
+import { Steps, createSystem, defaultConfig } from "@chakra-ui/react";
 
 // 2. Call `extendTheme` and pass your custom values
-export const theme = extendTheme({
-  config: {
-    initialColorMode: "dark",
-  },
-  fonts: {
-    body: "Inter, serif",
-    heading: "Inter, serif",
-    mono: "monospace",
+export const system = createSystem(defaultConfig, {
+  theme: {
+    tokens: {
+      fonts: {
+        body: {
+          value: "Inter, serif",
+        },
+        heading: {
+          value: "Inter, serif",
+        },
+        mono: {
+          value: "monospace",
+        },
+      },
+    },
   },
 });

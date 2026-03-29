@@ -6,19 +6,10 @@ import DataTable from "@/src/components/DataTable";
 import DiseaseList from "@/src/components/DiseaseList";
 import Header from "@/src/components/Header";
 import LanguageButton from "@/src/components/LanguageButton";
-import { ExternalLinkIcon } from "@chakra-ui/icons";
-import {
-  Spinner,
-  Button,
-  Container,
-  Heading,
-  Link,
-  SimpleGrid,
-  Stack,
-  Text,
-} from "@chakra-ui/react";
-
+import { Steps, Spinner, Button, Container, Heading, Link, SimpleGrid, Stack, Text } from "@chakra-ui/react";
 import useSWR from "swr";
+
+import { LuExternalLink } from 'react-icons/lu';
 // import { Metadata, ResolvingMetadata } from "next";
 
 // type Props = {

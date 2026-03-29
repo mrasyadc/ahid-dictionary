@@ -1,12 +1,15 @@
-import { MoonIcon, SunIcon } from "@chakra-ui/icons";
-import { Button, Stack, useColorMode } from "@chakra-ui/react";
+import { useColorMode } from "./ui/color-mode";
+import { Button, ClientOnly, Skeleton } from "@chakra-ui/react";
+import { LuMoon, LuSun } from 'react-icons/lu';
 
-export default function DarkModeButton(): JSX.Element {
+export default function DarkModeButton() {
   const { colorMode, toggleColorMode } = useColorMode();
 
   return (
-    <Button onClick={toggleColorMode}>
-      {colorMode == "dark" ? <SunIcon /> : <MoonIcon />}
-    </Button>
+    <ClientOnly fallback={<Skeleton width="10" height="10" />}>
+      <Button onClick={toggleColorMode}>
+        {colorMode == "light" ? <LuMoon /> : <LuSun />}
+      </Button>
+    </ClientOnly>
   );
 }

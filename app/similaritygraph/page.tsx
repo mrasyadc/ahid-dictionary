@@ -1,23 +1,21 @@
-"use client";
+"use client";;
 import { useEffect, useRef, useState, useMemo } from "react";
+import { useColorMode } from "../../src/components/ui/color-mode";
 import Image from "next/image";
 import styles from "./page.module.css";
 import useSWR from "swr";
 import {
+  Steps,
   Heading,
   Text,
   Button,
-  useColorMode,
   Stack,
   Input,
   Container,
-  InputGroup,
-  InputRightElement,
-  InputLeftElement,
   Kbd,
   Link,
   Center,
-  Divider,
+
   List,
   Grid,
   Box,
@@ -27,7 +25,6 @@ import {
   SimpleGrid,
   Spinner,
 } from "@chakra-ui/react";
-import { Search2Icon } from "@chakra-ui/icons";
 import DarkModeButton from "@/src/components/DarkModeButton";
 import SimilarityPageHeader from "@/src/components/HeaderSimilarityPage";
 import NetworkGraph from "@/src/components/SimilarityGraph";
@@ -35,6 +32,8 @@ import SimilarityTable from "@/src/components/SimilarityTable";
 import data from "@/json/similardata.json";
 import { useKeyPress } from "@/src/hooks/useKeyPress";
 import NextLink from 'next/link';
+import { LuSearch } from 'react-icons/lu';
+import { InputGroup } from "@/src/components/ui/input-group";
 
 const SimilarDisease: React.FC = () => {
   const altPressed = useKeyPress("Alt");
@@ -71,16 +70,15 @@ const SimilarDisease: React.FC = () => {
     <>
       <Stack direction={"row-reverse"} padding={6}>
         <DarkModeButton />
-        <Button as={NextLink} href="/" padding={4}>
-          Homepage
-        </Button>
+        <Button padding={4} asChild><NextLink href="/">Homepage
+                  </NextLink></Button>
       </Stack>
       <SimilarityPageHeader />
       <Container marginTop={10}>
-        <InputGroup>
-          <InputLeftElement>
-            <Search2Icon />
-          </InputLeftElement>
+        <InputGroup
+          startElement={<LuSearch />}
+          endElement={<><Kbd>Alt</Kbd>+<Kbd>K</Kbd></>}
+        >
           <Input
             placeholder="Search diseases or keywords"
             value={searchTerm}
@@ -88,12 +86,8 @@ const SimilarDisease: React.FC = () => {
             mb={4}
             ref={inputRef} // Attach ref to the input field
           />
-          <InputRightElement marginRight={5}>
-            <Kbd>Alt</Kbd>+<Kbd>K</Kbd>
-          </InputRightElement>
         </InputGroup>
       </Container>
-
       <Container centerContent>
         {filteredData.length > 0 ? (
           <NetworkGraph data={filteredData} />
@@ -101,13 +95,11 @@ const SimilarDisease: React.FC = () => {
           <Text>No data available</Text>
         )}
       </Container>
-
       <Container>
         {filteredData.length > 0 ? (
           <SimilarityTable data={filteredData} searchTerm={searchTerm} />
         ) : null}
       </Container>
-
       <Container maxWidth={"100ch"} centerContent={true} marginBottom={20}>
       </Container>
     </>

@@ -1,7 +1,10 @@
 // src/NetworkGraph.tsx
 import React, { useRef, useEffect, memo } from 'react';
+import { useColorMode } from "./ui/color-mode";
 import * as d3 from 'd3';
-import { Tooltip, useColorMode } from '@chakra-ui/react'
+import { Steps } from '@chakra-ui/react';
+
+import { Tooltip } from '@/src/components/ui/tooltip';
 
 interface Link {
   source: string;

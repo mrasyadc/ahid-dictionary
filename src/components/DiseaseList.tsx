@@ -1,18 +1,18 @@
-import { List, ListItem, ListIcon } from "@chakra-ui/react";
+import { Steps, List } from "@chakra-ui/react";
 
-import { ArrowForwardIcon, ChevronRightIcon, LinkIcon } from "@chakra-ui/icons";
+import { LuArrowRight, LuChevronRight, LuLink } from 'react-icons/lu';
 
 export default function DiseaseList({
   children,
 }: {
   children: React.ReactNode;
-}): JSX.Element {
+}) {
   return (
-    <List>
-      <ListItem>
-        <ListIcon as={ArrowForwardIcon} />
+    <List.Root>
+      <List.Item>
+        <List.Indicator asChild><LuArrowRight /></List.Indicator>
         {children}
-      </ListItem>
-    </List>
+      </List.Item>
+    </List.Root>
   );
 }
