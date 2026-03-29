@@ -18,8 +18,8 @@ export default function RootLayout({
       </body>
       <Script
         defer
-        src='https://umami.mrasyadc.com/script.js'
-        data-website-id='69eb7755-e2fc-4f82-989d-77dc19f3d443'
+        src='https://umami.oculab.ai/script.js'
+        data-website-id='dfce27b1-1252-4b93-94a0-bc69bb1343f5'
       />
     </html>
   );
