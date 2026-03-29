@@ -1,7 +1,10 @@
 // src/NetworkGraph.tsx
 import React, { useRef, useEffect, memo } from 'react';
+import { useColorMode } from "./ui/color-mode";
 import * as d3 from 'd3';
-import { Tooltip, useColorMode } from '@chakra-ui/react'
+import { Steps } from '@chakra-ui/react';
+
+import { Tooltip } from '@/src/components/ui/tooltip';
 
 interface Link {
   source: string;
@@ -31,10 +34,7 @@ const NetworkGraph: React.FC<NetworkGraphProps> = ({ data }) => {
     if (!data) return;
 
     d3.select(svgRef.current).selectAll('*').remove();
-    const svg = d3.select(svgRef.current as Element)
-        .call(d3.zoom().on('zoom', (event) => {
-            svg.attr('transform', event.transform);
-          }));
+    const svg = d3.select(svgRef.current as Element);
     const width = 600;
     const height = 400;
     const center = {
@@ -151,12 +151,12 @@ const NetworkGraph: React.FC<NetworkGraphProps> = ({ data }) => {
         .attr('y', d => (d as any).y);
     });
 
-    function mouseover(this: any) {
-      d3.select(this).style('cursor', 'pointer');
+    function mouseover(event: any) {
+      d3.select(event.currentTarget).style('cursor', 'pointer');
     }
 
-    function mouseout(this: any) {
-      d3.select(this).style('cursor', 'default');
+    function mouseout(event: any) {
+      d3.select(event.currentTarget).style('cursor', 'default');
     }
 
     function dragstarted(event: any, d: any) {

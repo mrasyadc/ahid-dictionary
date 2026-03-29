@@ -1,5 +1,5 @@
-import { Box, HStack, Text } from "@chakra-ui/react";
-import { ArrowRight } from "lucide-react";
+import { Flex, Text } from "@chakra-ui/react";
+import { LuArrowRight } from 'react-icons/lu';
 
 export default function DiseaseList({
   children,
@@ -7,22 +7,27 @@ export default function DiseaseList({
   children: React.ReactNode;
 }) {
   return (
-    <Box
-      p={4}
-      borderRadius="md"
-      borderWidth={1}
-      borderColor="gray.200"
-      _hover={{ 
-        borderColor: "blue.300", 
-        backgroundColor: "blue.50",
-        cursor: "pointer" 
-      }}
+    <Flex
+      align="center"
+      color="fg.muted"
       transition="all 0.2s"
+      _hover={{
+        color: "fg",
+        "& > svg": {
+          transform: "translateX(6px)",
+          color: "currentColor"
+        }
+      }}
+      cursor="pointer"
+      py={1}
     >
-      <HStack gap={3}>
-        <ArrowRight size={16} />
-        <Text>{children}</Text>
-      </HStack>
-    </Box>
+      <LuArrowRight
+        style={{
+          transition: "transform 0.2s ease-in-out, color 0.2s ease-in-out",
+          marginRight: "12px"
+        }}
+      />
+      <Text display="inline-block" transition="transform 0.2s">{children}</Text>
+    </Flex>
   );
 }

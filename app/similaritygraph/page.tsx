@@ -1,17 +1,21 @@
-"use client";
+"use client";;
 import { useEffect, useRef, useState, useMemo } from "react";
+import { useColorMode } from "../../src/components/ui/color-mode";
 import Image from "next/image";
 import styles from "./page.module.css";
 import useSWR from "swr";
 import {
+  Steps,
   Heading,
   Text,
   Button,
   Stack,
   Input,
   Container,
+  Kbd,
   Link,
   Center,
+
   List,
   Grid,
   Box,
@@ -21,14 +25,15 @@ import {
   SimpleGrid,
   Spinner,
 } from "@chakra-ui/react";
-import { Search } from "lucide-react";
-import DarkModeButton from "@/components/DarkModeButton";
-import SimilarityPageHeader from "@/components/HeaderSimilarityPage";
-import NetworkGraph from "@/components/SimilarityGraph";
-import SimilarityTable from "@/components/SimilarityTable";
+import DarkModeButton from "@/src/components/DarkModeButton";
+import SimilarityPageHeader from "@/src/components/HeaderSimilarityPage";
+import NetworkGraph from "@/src/components/SimilarityGraph";
+import SimilarityTable from "@/src/components/SimilarityTable";
 import data from "@/json/similardata.json";
 import { useKeyPress } from "@/hooks/useKeyPress";
 import NextLink from 'next/link';
+import { LuSearch } from 'react-icons/lu';
+import { InputGroup } from "@/src/components/ui/input-group";
 
 const SimilarDisease: React.FC = () => {
   const altPressed = useKeyPress("Alt");
@@ -65,48 +70,37 @@ const SimilarDisease: React.FC = () => {
     <>
       <Stack direction={"row-reverse"} padding={6}>
         <DarkModeButton />
-        <NextLink href="/" passHref>
-          <Button as={Link} padding={4}>
-            Homepage
-          </Button>
-      </NextLink>
+        <Button padding={4} asChild><NextLink href="/">Homepage
+                  </NextLink></Button>
       </Stack>
       <SimilarityPageHeader />
-      <Container marginTop={10}>
-        <Box position="relative">
-          <Box position="absolute" left="3" top="50%" transform="translateY(-50%)" zIndex="2">
-            <Search size={16} />
-          </Box>
+      <Flex justify="center" mt={10} w="full" px={4}>
+        <InputGroup
+          startElement={<LuSearch />}
+          endElement={<><Kbd>Alt</Kbd>+<Kbd>K</Kbd></>}
+          maxWidth="600px"
+          width="100%"
+        >
           <Input
             placeholder="Search diseases or keywords"
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
-            mb={4}
-            paddingLeft="10"
             ref={inputRef} // Attach ref to the input field
           />
-          <Box position="absolute" right="3" top="50%" transform="translateY(-50%)" zIndex="2">
-            <Text fontSize="sm" color="gray.500">Alt+K</Text>
-          </Box>
-        </Box>
-      </Container>
-
-      <Container centerContent>
+        </InputGroup>
+      </Flex>
+      <Flex direction="column" align="center" w="full" mb={20} mt={10} px={4}>
         {filteredData.length > 0 ? (
           <NetworkGraph data={filteredData} />
         ) : (
           <Text>No data available</Text>
         )}
-      </Container>
-
-      <Container>
-        {filteredData.length > 0 ? (
-          <SimilarityTable data={filteredData} searchTerm={searchTerm} />
-        ) : null}
-      </Container>
-
-      <Container maxWidth={"100ch"} centerContent={true} marginBottom={20}>
-      </Container>
+        <Box maxWidth="100ch" width="100%" mt={10}>
+          {filteredData.length > 0 ? (
+            <SimilarityTable data={filteredData} searchTerm={searchTerm} />
+          ) : null}
+        </Box>
+      </Flex>
     </>
   );
 };

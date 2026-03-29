@@ -1,5 +1,5 @@
-import { Info } from "lucide-react";
-import { Box } from "@chakra-ui/react";
+import { Steps, Popover, HoverCard, Icon } from "@chakra-ui/react";
+import { LuInfo } from 'react-icons/lu';
 
 interface TextPopoverProps {
   attr: string;
@@ -11,13 +11,20 @@ export default function TextPopover({
   attr,
 }: TextPopoverProps) {
   return (
-    <Box 
-      display="inline-block" 
-      ml={2}
-      title={`${attr} full text: ${text}`}
-      style={{ cursor: 'pointer' }}
-    >
-      <Info color="blue" size={16} />
-    </Box>
+    <Popover.Root
+      positioning={{
+        placement: 'top-start'
+      }}>
+      <Popover.Trigger asChild>
+        <Icon color={"blue"} marginLeft={2} asChild><LuInfo /></Icon>
+      </Popover.Trigger>
+      <Popover.Positioner>
+        <Popover.Content>
+          <Popover.Arrow />
+          <Popover.Title>{attr} full text</Popover.Title>
+          <Popover.Body>{text}</Popover.Body>
+        </Popover.Content>
+      </Popover.Positioner>
+    </Popover.Root>
   );
 }

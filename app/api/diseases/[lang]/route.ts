@@ -7,11 +7,11 @@ export async function GET(
   {
     params,
   }: {
-    params: { lang: string };
+    params: Promise<{ lang: string }>;
   }
 ) {
   //Find the absolute path of the json directory
-  const { lang } = params;
+  const { lang } = await params;
 
   const jsonDirectory = path.join(process.cwd(), "json");
 
