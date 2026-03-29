@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 
-import { useLocalStorage } from "@/src/hooks/useLocalStorage";
+import { useLocalStorage } from "@/hooks/useLocalStorage";
 
 /**
  * A hook that detects the appropriate modifier key (Cmd for Mac, Alt for others).

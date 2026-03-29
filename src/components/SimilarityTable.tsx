@@ -1,8 +1,8 @@
 import { Badge, Box, Link,Table } from '@chakra-ui/react';
 import React from 'react';
 
-import { SIMILARITY_COLOR } from '@/src/constants';
-import { SearchQuery } from '@/src/utils/parseSearch';
+import { SIMILARITY_COLOR } from '@/constants';
+import { SearchQuery } from '@/utils/parseSearch';
 
 interface DiseaseTableProps {
   data: { disease1: string; disease2: string; similarity: number }[];

@@ -2,8 +2,8 @@
 import * as d3 from 'd3';
 import React, { memo,useEffect, useRef } from 'react';
 
-import { useColorMode } from "@/src/components/ui/color-mode";
-import { SIMILARITY_COLOR } from '@/src/constants';
+import { useColorMode } from "@/components/ui/color-mode";
+import { SIMILARITY_COLOR } from '@/constants';
 
 
 interface Link {

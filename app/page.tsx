@@ -18,13 +18,13 @@ import { useEffect, useMemo,useRef, useState } from "react";
 import { LuSearch } from 'react-icons/lu';
 import useSWR from "swr";
 
-import DarkModeButton from "@/src/components/DarkModeButton";
-import DiseaseList from "@/src/components/DiseaseList";
-import Header from "@/src/components/Header";
-import { InputGroup } from "@/src/components/ui/input-group";
-import { SIMILARITY_COLOR } from "@/src/constants";
-import { useModifierKey } from "@/src/hooks/useModifierKey";
-import { matchesSingle,parseSearch } from "@/src/utils/parseSearch";
+import DarkModeButton from "@/components/DarkModeButton";
+import DiseaseList from "@/components/DiseaseList";
+import Header from "@/components/Header";
+import { InputGroup } from "@/components/ui/input-group";
+import { SIMILARITY_COLOR } from "@/constants";
+import { useModifierKey } from "@/hooks/useModifierKey";
+import { matchesSingle,parseSearch } from "@/utils/parseSearch";
 
 const EXAMPLES = ["Dengue", "Malaria, Rabies", "Hepatitis"];
 

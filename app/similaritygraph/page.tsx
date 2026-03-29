@@ -13,15 +13,15 @@ import NextLink from 'next/link';
 import { useEffect, useMemo,useRef, useState } from "react";
 import { LuSearch } from 'react-icons/lu';
 
+import DarkModeButton from "@/components/DarkModeButton";
+import SimilarityPageHeader from "@/components/HeaderSimilarityPage";
+import NetworkGraph from "@/components/SimilarityGraph";
+import SimilarityTable from "@/components/SimilarityTable";
+import { InputGroup } from "@/components/ui/input-group";
+import { SIMILARITY_COLOR } from "@/constants";
+import { useModifierKey } from "@/hooks/useModifierKey";
 import data from "@/json/similardata.json";
-import DarkModeButton from "@/src/components/DarkModeButton";
-import SimilarityPageHeader from "@/src/components/HeaderSimilarityPage";
-import NetworkGraph from "@/src/components/SimilarityGraph";
-import SimilarityTable from "@/src/components/SimilarityTable";
-import { InputGroup } from "@/src/components/ui/input-group";
-import { SIMILARITY_COLOR } from "@/src/constants";
-import { useModifierKey } from "@/src/hooks/useModifierKey";
-import { matchesRow,parseSearch } from "@/src/utils/parseSearch";
+import { matchesRow,parseSearch } from "@/utils/parseSearch";
 
 const EXAMPLES = ["Rubella", "Dengue, Malaria", "Rubella vs Dengue"];
 

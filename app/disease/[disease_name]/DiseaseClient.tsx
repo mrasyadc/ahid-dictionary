@@ -3,11 +3,11 @@
 import { Box,Flex, Stack } from "@chakra-ui/react";
 import { useState } from "react";
 
-import BackButton from "@/src/components/BackButton";
-import DarkModeButton from "@/src/components/DarkModeButton";
-import DataTable from "@/src/components/DataTable";
-import Header from "@/src/components/Header";
-import LanguageButton from "@/src/components/LanguageButton";
+import BackButton from "@/components/BackButton";
+import DarkModeButton from "@/components/DarkModeButton";
+import DataTable from "@/components/DataTable";
+import Header from "@/components/Header";
+import LanguageButton from "@/components/LanguageButton";
 
 export default function DiseaseClient({
   initialDataEn,

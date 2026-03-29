@@ -4,9 +4,9 @@
   "author": "Muhammad Rasyad Caesarardhi",
   "type": "module",
   "scripts": {
-    "dev": "next dev --turbo",
+    "dev": "next dev -p 3001 --turbo",
     "build": "npm run lint && next build",
-    "start": "next start",
+    "start": "next start -p 3001",
     "lint": "eslint ."
   },
   "engines": {

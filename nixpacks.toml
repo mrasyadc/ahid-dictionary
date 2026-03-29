@@ -1,0 +1,8 @@
+[variables]
+PORT = "3001"
+
+[phases.build]
+cmds = ["npm run build"]
+
+[phases.start]
+cmds = ["npm start"]
