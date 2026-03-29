@@ -1,8 +1,7 @@
 "use client";
 
-import { Box,Flex, Spinner, Stack } from "@chakra-ui/react";
-import { use,useState } from "react";
-import useSWR from "swr";
+import { Box,Flex, Stack } from "@chakra-ui/react";
+import { useState } from "react";
 
 import BackButton from "@/src/components/BackButton";
 import DarkModeButton from "@/src/components/DarkModeButton";
@@ -10,26 +9,13 @@ import DataTable from "@/src/components/DataTable";
 import Header from "@/src/components/Header";
 import LanguageButton from "@/src/components/LanguageButton";
 
-const fetcher = (url: string) => fetch(url).then((res) => res.json());
-
 export default function DiseaseClient({
-  params,
+  initialDataEn,
+  initialDataId,
 }: {
-  params: Promise<{ disease_name: string }>;
+  initialDataEn: any;
+  initialDataId: any;
 }) {
-  let { disease_name } = use(params);
-  disease_name = decodeURIComponent(disease_name);
-
-  const {
-    data: data_en,
-    isLoading: isLoading_en,
-  } = useSWR("/api/diseases/en", fetcher);
-  
-  const {
-    data: data_id,
-    isLoading: isLoading_id,
-  } = useSWR("/api/diseases/id", fetcher);
-  
   const [isEnglish, setLanguage] = useState(true);
 
   return (
@@ -49,19 +35,9 @@ export default function DiseaseClient({
         <Box maxWidth="100ch" width="100%">
           <BackButton />
           {isEnglish ? (
-            <>
-              {isLoading_en && <Spinner />}
-              {!isLoading_en && data_en && (
-                <DataTable isEnglish={isEnglish} disease={data_en[disease_name]} />
-              )}
-            </>
+            <DataTable isEnglish={isEnglish} disease={initialDataEn} />
           ) : (
-            <>
-              {isLoading_id && <Spinner />}
-              {!isLoading_id && data_id && (
-                <DataTable isEnglish={isEnglish} disease={data_id[disease_name]} />
-              )}
-            </>
+            <DataTable isEnglish={isEnglish} disease={initialDataId} />
           )}
         </Box>
       </Flex>

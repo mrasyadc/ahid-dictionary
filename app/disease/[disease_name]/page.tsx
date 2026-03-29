@@ -23,6 +23,23 @@ export default async function DiseasePage({
 }: {
   params: Promise<{ disease_name: string }>;
 }) {
-  // Pass the params promise to the client component
-  return <DiseaseClient params={params} />;
+  const { disease_name } = await params;
+  const decodedName = decodeURIComponent(disease_name);
+
+  const jsonDirectory = path.join(process.cwd(), "json");
+  const [dataEn, dataId] = await Promise.all([
+    fs.readFile(path.join(jsonDirectory, "data.json"), "utf8"),
+    fs.readFile(path.join(jsonDirectory, "data_id.json"), "utf8"),
+  ]);
+
+  const initialDataEn = JSON.parse(dataEn)[decodedName];
+  const initialDataId = JSON.parse(dataId)[decodedName];
+
+  // Pass the initial data to the client component
+  return (
+    <DiseaseClient 
+      initialDataEn={initialDataEn} 
+      initialDataId={initialDataId} 
+    />
+  );
 }
