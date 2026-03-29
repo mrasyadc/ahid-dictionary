@@ -1,23 +1,20 @@
-"use client";
-
+"use client";;
 import Image from "next/image";
+import { useColorMode } from "../src/components/ui/color-mode";
 import styles from "./page.module.css";
 import useSWR from "swr";
 import {
+  Steps,
   Heading,
   Text,
   Button,
-  useColorMode,
   Stack,
   Input,
   Container,
-  InputGroup,
-  InputRightElement,
-  InputLeftElement,
   Kbd,
   Link,
   Center,
-  Divider,
+
   List,
   Grid,
   Box,
@@ -27,19 +24,20 @@ import {
   SimpleGrid,
   Spinner,
 } from "@chakra-ui/react";
-import { ExternalLinkIcon, Search2Icon, SunIcon } from "@chakra-ui/icons";
 import { useKeyPress } from "../src/hooks/useKeyPress";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState, useMemo } from "react";
 import DarkModeButton from "@/src/components/DarkModeButton";
 import DataTable from "@/src/components/DataTable";
 import DiseaseList from "@/src/components/DiseaseList";
 import LanguageButton from "@/src/components/LanguageButton";
 import Header from "@/src/components/Header";
 import NextLink from 'next/link';
+import { LuExternalLink, LuSearch, LuSun } from 'react-icons/lu';
+import { InputGroup } from "@/src/components/ui/input-group";
 
 const fetcher = (url: string) => fetch(url).then((res) => res.json());
 
-export default function Home(): JSX.Element {
+export default function Home() {
   const altPressed = useKeyPress("Alt");
   const kPressed = useKeyPress("k");
 
@@ -57,56 +55,43 @@ export default function Home(): JSX.Element {
     }
   }, [kPressed, altPressed]);
 
-  const [diseases, setDiseases] = useState([""]);
   const [diseasesKey, setDiseasesKey] = useState();
   const [searchTerm, setSearchTerm] = useState("");
 
   const { data, error, isLoading } = useSWR("/api/diseases/en", fetcher);
 
-  useEffect(() => {
-    if (!isLoading) {
-      setDiseases(Object.keys(data));
-    }
-  }, [data, isLoading]);
-
-  useEffect(() => {
-    if (!isLoading) {
-      const results = Object.keys(data).filter((disease) => {
-        return disease.toLowerCase().includes(searchTerm.toLowerCase());
-      });
-      setDiseases(results);
-    }
-  }, [searchTerm, isLoading, data]);
+  const diseases = useMemo(() => {
+    if (isLoading || !data) return [""];
+    return Object.keys(data).filter((disease) => {
+      return disease.toLowerCase().includes(searchTerm.toLowerCase());
+    });
+  }, [data, isLoading, searchTerm]);
 
   return (
     <>
       <Stack direction={"row-reverse"} padding={6}>
         <DarkModeButton />
-        <NextLink href="/similaritygraph" passHref>
-          <Button as={Link} padding={4}>
-            Disease Similarity Graph
-          </Button>
-      </NextLink>
+        <Button padding={4} asChild><NextLink href="/similaritygraph">Disease Similarity Graph
+                  </NextLink></Button>
       </Stack>
       <Header />
-      <Container marginTop={10}>
-        <InputGroup>
-          <InputLeftElement>
-            <Search2Icon />
-          </InputLeftElement>
+      <Flex justify="center" mt={10} w="full" px={4}>
+        <InputGroup
+          startElement={<LuSearch />}
+          endElement={<><Kbd>Alt</Kbd>+<Kbd>K</Kbd></>}
+          maxWidth="600px"
+          width="100%"
+        >
           <Input
             placeholder="Search diseases or keywords"
             ref={inputRef}
             onChange={(e) => setSearchTerm(e.target.value)}
           />
-          <InputRightElement marginRight={5}>
-            <Kbd>Alt</Kbd>+<Kbd>K</Kbd>
-          </InputRightElement>
         </InputGroup>
-      </Container>
-
-      <Container maxWidth={"100ch"} centerContent={true} marginBottom={20}>
-        <SimpleGrid columns={[1, null, 2]} spacing={4} marginTop={10}>
+      </Flex>
+      <Flex justify="center" w="full" mb={20} mt={10} px={4}>
+        <Box maxWidth="700px" width="100%">
+          <SimpleGrid columns={[1, null, 2]} gap={4}>
           {isLoading && <Spinner />}
           {!isLoading &&
             diseases[0] !== "" &&
@@ -121,7 +106,8 @@ export default function Home(): JSX.Element {
               );
             })}
         </SimpleGrid>
-      </Container>
+        </Box>
+      </Flex>
     </>
   );
 }

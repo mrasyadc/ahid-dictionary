@@ -1,5 +1,5 @@
 import React from 'react';
-import { Table, Tbody, Td, Th, Thead, Tr, Box } from '@chakra-ui/react';
+import { Steps, Table, Box } from '@chakra-ui/react';
 
 interface DiseaseTableProps {
   data: { disease1: string; disease2: string; similarity: number }[];
@@ -17,28 +17,28 @@ const DiseaseTable: React.FC<DiseaseTableProps> = ({ data, searchTerm }) => {
 
   return (
     <Box>
-      <Table>
-        <Thead>
-          <Tr>
-            <Th>Disease 1</Th>
-            <Th>Disease 2</Th>
-            <Th>Similarity</Th>
-          </Tr>
-        </Thead>
-        <Tbody>
+      <Table.Root>
+        <Table.Header>
+          <Table.Row>
+            <Table.ColumnHeader>Disease 1</Table.ColumnHeader>
+            <Table.ColumnHeader>Disease 2</Table.ColumnHeader>
+            <Table.ColumnHeader>Similarity</Table.ColumnHeader>
+          </Table.Row>
+        </Table.Header>
+        <Table.Body>
           {data.map((item, index) => (
-            <Tr key={index}>
-              <Td style={matchSearchTerm(item.disease1) ? highlightStyle : {}}>
+            <Table.Row key={index}>
+              <Table.Cell style={matchSearchTerm(item.disease1) ? highlightStyle : {}}>
                 {item.disease1}
-              </Td>
-              <Td style={matchSearchTerm(item.disease2) ? highlightStyle : {}}>
+              </Table.Cell>
+              <Table.Cell style={matchSearchTerm(item.disease2) ? highlightStyle : {}}>
                 {item.disease2}
-              </Td>
-              <Td>{item.similarity}</Td>
-            </Tr>
+              </Table.Cell>
+              <Table.Cell>{item.similarity}</Table.Cell>
+            </Table.Row>
           ))}
-        </Tbody>
-      </Table>
+        </Table.Body>
+      </Table.Root>
     </Box>
   );
 };
