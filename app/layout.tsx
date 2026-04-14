@@ -22,7 +22,7 @@ export default function RootLayout({
         <Provider>{children}</Provider>
         <Script
           defer
-          src='https://umami.oculab.ai/script.js'
+          src='https://umami.mrasyadc.com/script.js'
           data-website-id='dfce27b1-1252-4b93-94a0-bc69bb1343f5'
           strategy="afterInteractive"
         />
