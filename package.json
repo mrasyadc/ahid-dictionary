@@ -12,6 +12,9 @@
   "engines": {
     "node": ">=20.9.0"
   },
+  "overrides": {
+    "postcss": "^8.5.1"
+  },
   "dependencies": {
     "@chakra-ui/react": "^3.34.0",
     "@emotion/react": "^11.14.0",
